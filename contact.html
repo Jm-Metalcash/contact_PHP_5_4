@@ -29,23 +29,23 @@
                         <label for="firstname" class="formbold-form-label">
                             Prénom
                         </label>
-                        <input type="text" name="firstname" id="firstname" class="formbold-form-input input-value"  />
+                        <input type="text" name="firstname" id="firstname" class="formbold-form-input input-value"  placeholder="Votre prénom" />
                     </div>
                     <div>
                         <label for="lastname" class="formbold-form-label"> Nom de famille </label>
-                        <input type="text" name="lastname" id="lastname" class="formbold-form-input input-value"  />
+                        <input type="text" name="lastname" id="lastname" class="formbold-form-input input-value" placeholder="Votre nom de famille" />
                     </div>
                 </div>
 
                 <div class="formbold-input-flex">
                     <div>
                         <label for="email" class="formbold-form-label"> E-mail </label>
-                        <input type="email" name="email" id="email" class="formbold-form-input input-value" />
+                        <input type="email" name="email" id="email" class="formbold-form-input input-value" placeholder="dupont@exemple.com" />
                         <div id="emailError" class="error-message">Veuillez saisir une adresse e-mail valide.</div>
                     </div>
                     <div>
                         <label for="phone" class="formbold-form-label"> Numéro de téléphone </label>
-                        <input type="text" name="phone" id="phone" class="formbold-form-input input-value" required />
+                        <input type="text" name="phone" id="phone" class="formbold-form-input input-value" placeholder="Votre numéro de téléphone" required />
                         <div id="phoneError" class="error-message">Veuillez saisir un numéro de téléphone valide.</div>
                     </div>
                 </div>
@@ -53,22 +53,22 @@
                 <div class="formbold-input-flex">
                     <div>
                         <label for="address" class="formbold-form-label">Rue, numéro</label>
-                        <input type="text" name="address" id="address" class="formbold-form-input input-value" />
+                        <input type="text" name="address" id="address" class="formbold-form-input input-value" placeholder="Votre rue et numéro"/>
                     </div>
                     <div>
                         <label for="postalCode" class="formbold-form-label">Code postal</label>
-                        <input type="text" name="postalCode" id="postalCode" class="formbold-form-input input-value" />
+                        <input type="text" name="postalCode" id="postalCode" class="formbold-form-input input-value" placeholder="Votre code postal" />
                     </div>
                 </div>
                 
                 <div class="formbold-input-flex">
                     <div>
                         <label for="locality" class="formbold-form-label">Localité</label>
-                        <input type="text" name="locality" id="locality" class="formbold-form-input input-value" />
+                        <input type="text" name="locality" id="locality" class="formbold-form-input input-value" placeholder="Votre localité/ville" />
                     </div>
                     <div>
                         <label for="country" class="formbold-form-label">Pays</label>
-                        <input type="text" name="country" id="country" class="formbold-form-input input-value" />
+                        <input type="text" name="country" id="country" class="formbold-form-input input-value" placeholder="Votre pays" />
                     </div>
                 </div>
 
@@ -79,24 +79,36 @@
                         Titulaire du compte
                     </label>
                     <input type="text" name="accountHolder" id="accountHolder"
-                        class="formbold-form-input input-value"  />
+                        class="formbold-form-input input-value" placeholder="exemple: Jean Dupont" />
                 </div>
                 <div class="formbold-mb-3">
                     <label for="iban" class="formbold-form-label">
                         IBAN
                     </label>
-                    <input type="text" name="iban" id="iban" class="formbold-form-input input-value" />
+                    <input type="text" name="iban" id="iban" class="formbold-form-input input-value" placeholder="exemple: BE6800000000011" />
                     <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et réessayer</div>
                 </div>
 
                 <div class="formbold-input-flex">
                     <div>
                         <label for="bankName" class="formbold-form-label"> Nom de la banque </label>
-                        <input type="text" name="bankName" id="bankName" class="formbold-form-input input-value" />
+                        <input type="text" name="bankName" id="bankName" class="formbold-form-input input-value" placeholder="Le nom de votre banque" />
                     </div>
                     <div>
                         <label for="swift" class="formbold-form-label"> SWIFT </label>
-                        <input type="text" name="swift" id="swift" class="formbold-form-input input-value" />
+                        <input type="text" name="swift" id="swift" class="formbold-form-input input-value" placeholder="exemple: ECMSBEBBXXX" />
+                    </div>
+                </div>
+
+                <h3 class="header-section">Informations de la carte d'identité</h3>
+                <div class="formbold-input-flex">
+                    <div>
+                        <label for="idCard" class="formbold-form-label"> Numéro de la carte d'identité </label>
+                        <input type="text" name="idCard" id="idCard" class="formbold-form-input input-value" placeholder="exemple: 000-5900000-02" />
+                    </div>
+                    <div>
+                        <label for="expirationIdCart" class="formbold-form-label"> Date d'expiration</label>
+                        <input type="text" name="expirationIdCart" id="expirationIdCart" class="formbold-form-input input-value" placeholder="exemple: 04.08.2028" />
                     </div>
                 </div>
 
@@ -122,7 +134,7 @@
                 </div>
 
                 <button class="formbold-btn">Générer le bordereau d'achat</button>
-                <div id="formError" class="form-error-message">Veuillez corriger les champs nécessaires avant de poursuivre.</div>
+                <div id="formError" class="form-error-message">Merci de vérifier et de corriger les informations avant de procéder à la génération du bordereau d'achat.</div>
             </form>
         </div>
     </div>
