@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.container {
+    max-width: 770px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* SECTION CODE BARRE */
+.header-barcode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-title h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.barcode-section {
+    text-align: center;
+    position: relative;
+}
+
+.barcode-section .date {
+    font-size: 9px;
+    color: #2a2a2a;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+.barcode-section .id_barcode {
+    font-size: 11px;
+    color: #1d1d1d;
+    position: absolute;
+    top: 62px;
+    left: 47px;
+}
+
+.barcode-section img {
+    width: 170px;
+    height: 80px;
+}
+
+.barcode-section {
+    font-size: 14px;
+    margin-top: 5px;
+}
+/* END SECTION CODE BARRE */
+
+
+/* SECTION HEADER */
+.header-info {
+    text-align: center;
+    background-color: #ffff;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.header-info-p {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.header-address h2 {
+    font-size: 27px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.header-address p {
+    font-size: 20px;
+    margin: 0px 5px;
+    font-weight: bold;
+}
+
+.note {
+    font-size: 12px;
+    color: rgb(40, 40, 40);
+    margin-top: 5px;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+/* END SECTION HEADER */
+
+/* SECTION INFORMATIONS USERS */
+
+.separation-benificiary {
+    border-top: .5px solid rgb(70, 70, 70);
+    width: 100%;
+    margin-top: 20px;
+}
+.beneficiary-info {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 12px;
+}
+
+.column {
+    width: 44%;
+    position: relative;
+}
+
+.column h3 {
+    padding-top: 10px;
+    font-size: 12px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+}
+
+.info-grid p {
+    display: contents;
+    margin-bottom: 3px;
+    white-space: nowrap;
+}
+
+.column:first-child .info-grid span {
+    margin-left: 10px;
+}
+
+.column:last-child .info-grid span {
+    margin-left: 5px;
+}
+
+.card-info {
+    position: absolute;
+    top: 127px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+}
+
+.card-info p {
+    margin-top: 3px;
+    display: flex;
+}
+
+.card-info span {
+    padding-left: 12px;
+    text-align: left;
+}
+
+/* END SECTION INFORMATIONS USER */
+
+/* SECTION TABLES */
+table {
+    margin-top: 50px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+}
+
+th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #333;
+    font-size: 14px;
+}
+
+.th-desc {
+    font-size: 11px;
+    opacity: .9
+}
+
+td {
+    font-size: 12px;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th:nth-child(4), td:nth-child(4) {
+    text-align: center;
+}
+
+/* END SECTION TABLES */
+
+
+
+/* SECTION FOOTER */
+footer {
+    margin-top: 20px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.footer-content {
+    margin-top: 30px;
+    width: 70%; /* Texte à gauche, prend 65% de l'espace */
+    margin-bottom: 20px;
+}
+
+.accept-conditions {
+    font-size: 10px;
+}
+
+.footer-content p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    font-size: 10px;
+}
+
+.certificate {
+    width: 88%;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+.footer-content a {
+    color: #000;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.signature-section {
+    margin-top: 70px;
+    width: 40%; /* Signature à droite, prend 30% de l'espace */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner la signature à droite */
+}
+
+.signature-section .signature-line {
+    border-top: 1px solid black;
+    width: 280px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.signature-section p {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Image metalcash */
+.background-image {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 34%; 
+    opacity: 0.03; 
+    z-index: 10; 
+    pointer-events: none; 
+}
+
+.background-image img {
+    width: 100%; 
+    height: auto; 
+}
+
+
+/* Styles spécifiques pour l'impression */
+@media print {
+    .background-image {
+        width: 115%; 
+        opacity: 0.03; 
+        position: fixed;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .background-image img {
+        width: 100%; 
+        height: auto;
+    }
+
+    @page {
+        margin-top: 25px;
+        margin-left: 50px;
+        margin-right: 50px;
+
+    }
+
+    body {
+        margin: 0;
+    }
+}
