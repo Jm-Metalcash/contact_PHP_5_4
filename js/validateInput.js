@@ -164,7 +164,7 @@ function validateExpiryDate() {
   // Vérification du format de la date
   if (!dateRegex.test(expiryDateInput)) {
     expiryError.textContent =
-      "Veuillez entrer une date valide au format jj.mm.aaaa";
+      "La date saisie n'est pas valide. Veuillez vérifier le jour et le mois.";
     expiryError.classList.add("show");
     return false;
   }
