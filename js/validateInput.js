@@ -86,3 +86,74 @@ form.addEventListener("submit", event => {
         formError.classList.add("show");
     }
 });
+
+
+
+// Fonction pour valider et comparer la date d'expiration
+document.getElementById("expiryDate").addEventListener("input", function(e) {
+    const input = e.target;
+    const value = input.value.replace(/[^\d]/g, ""); // Supprimer tout sauf les chiffres
+    let formattedValue = "";
+
+    // Insère les points de séparation automatiquement sans espacement autour des points
+    if (value.length >= 1) {
+        formattedValue += value.substring(0, 2); // jj
+    }
+    if (value.length >= 3) {
+        formattedValue += "." + value.substring(2, 4); // mm
+    }
+    if (value.length >= 5) {
+        formattedValue += "." + value.substring(4, 8); // aaaa
+    }
+
+    // Mettre à jour la valeur de l'input
+    input.value = formattedValue;
+
+    // Ne pas permettre plus de 10 caractères
+    if (input.value.length > 10) {
+        input.value = input.value.slice(0, 10);
+    }
+
+    // Ajouter la classe filled si le champ est complètement rempli
+    if (input.value.length === 10) {
+        input.blur();
+        input.classList.add("formated-expiryDate");
+    } else {
+        input.classList.remove("filled");
+        input.classList.remove("formated-expiryDate");
+    }
+});
+
+
+document.getElementById("expiryDate").addEventListener("blur", function() {
+    validateExpiryDate(); // Valider la date lorsqu'on quitte l'input
+});
+
+function validateExpiryDate() {
+    const expiryDateInput = document.getElementById("expiryDate").value;
+    const expiryError = document.getElementById("expiryError");
+
+    // Expression régulière pour accepter les formats JJ.MM.YYYY
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/;
+
+    // Vérification du format de la date
+    if (!dateRegex.test(expiryDateInput)) {
+        expiryError.textContent = "Veuillez entrer une date valide au format jj.mm.aaaa";
+        expiryError.classList.add("show");
+        return false;
+    }
+
+    const [day, month, year] = expiryDateInput.split(".");
+    const expiryDate = new Date(year, month - 1, day);
+    const today = new Date();
+
+    // Comparer la date de la carte d'identité avec la date actuelle
+    if (expiryDate < today) {
+        expiryError.textContent = "Votre carte d'identité est expirée.";
+        expiryError.classList.add("show");
+        return false;
+    } else {
+        expiryError.classList.remove("show");
+        return true;
+    }
+}

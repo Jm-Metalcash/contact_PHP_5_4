@@ -90,7 +90,7 @@
                             Titulaire du compte
                         </label>
                         <input type="text" name="accountHolder" id="accountHolder"
-                            class="formbold-form-input readonly-input" placeholder="exemple: Jean Dupont" disabled />
+                            class="formbold-form-input readonly-input" disabled />
                     </div>
                     <div class="formbold-mb-3">
                         <label for="iban" class="formbold-form-label">
@@ -123,10 +123,16 @@
                         <input type="text" name="idCard" id="idCard" class="formbold-form-input input-value"
                             placeholder="exemple: 000-5900000-02" />
                     </div>
-                    <div>
-                        <label for="expirationIdCart" class="formbold-form-label"> Date d'expiration</label>
-                        <input type="text" name="expirationIdCart" id="expirationIdCart"
-                            class="formbold-form-input input-value" placeholder="exemple: 04.08.2028" />
+                    <div class="formbold-mb-3">
+                        <label for="expiryDate" class="formbold-form-label">
+                            Date d'expiration de la carte d'identité
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="text" id="expiryDate" name="expiryDate" class="formbold-form-input masked-input" maxlength="10" placeholder="jj.mm.aaaa">
+                            <span class="mask">__/__/____</span>
+                        </div>
+                        <div id="expiryError" class="error-message">Veuillez entrer une date valide au format jj.mm.aaaa.</div>
+                                                                   
                     </div>
                 </div>
 

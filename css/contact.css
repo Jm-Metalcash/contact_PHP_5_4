@@ -243,24 +243,75 @@ body {
 }
 
 .readonly-input {
-  background-color: #e9ecef; /* Griser le champ */
-  color: #6c757d; /* Texte grisé */
-  cursor: not-allowed; /* Curseur pour indiquer que c'est bloqué */
-  border: 1px solid #ced4da; /* Conserver une bordure standard */
-  box-shadow: none; /* Désactiver toute ombre */
-  transition: none !important; /* Désactiver toute transition */
-  animation: none !important; /* Désactiver toute animation */
+  background-color: #e9ecef; 
+  color: #6c757d; 
+  cursor: not-allowed; 
+  border: 1px solid #ced4da; 
+  box-shadow: none;
+  transition: none !important;
+  animation: none !important;
 }
 
-/* Empêcher les styles de changement sur hover ou focus */
 .readonly-input:hover, 
 .readonly-input:focus, 
 .readonly-input:active {
-  background-color: #e9ecef !important; /* Toujours gris */
-  color: #6c757d !important; /* Toujours la même couleur */
-  border: 1px solid #ced4da !important; /* Conserver la bordure */
-  box-shadow: none !important; /* Aucune ombre sur focus */
-  outline: none !important; /* Pas de contour */
+  background-color: #e9ecef !important; 
+  color: #6c757d !important; 
+  border: 1px solid #ced4da !important; 
+  box-shadow: none !important; 
+  outline: none !important;
+}
+
+/* format des inputs encodage */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.masked-input {
+  text-align: left;
+  width: 100%;
+  padding: 13px 22px;
+  border-radius: 5px;
+  border: 1px solid #dde3ec;
+  background: transparent;
+  font-weight: 500;
+  font-size: 14px;
+  color: #536387;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 3.5px; /* Espacement normal */
+}
+
+.mask {
+  position: absolute;
+  top: 15px;
+  left: 22px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #b0b0b0;
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: 4px; /* Espacement pour les underscores */
+  white-space: nowrap;
+}
+
+.masked-input::placeholder {
+  color: transparent;
+}
+
+.masked-input.filled + .mask {
+  color: transparent;
+}
+
+.masked-input:focus {
+  border-color: #005691;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formated-expiryDate {
+ letter-spacing: 0px;
 }
 
 
