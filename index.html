@@ -56,16 +56,16 @@
 
                 <h3 class="header-section">Adresse</h3>
                 <div class="formbold-input-flex">
-                <div style="width: 100% !important;">
-                    <label for="address" class="formbold-form-label">Rue et numéro</label>
-                    <input type="text" name="address" id="address" class="formbold-form-input input-value"
-                        placeholder="Votre rue et numéro" />
-                </div>
-                <div>
-                    <label for="postalCode" class="formbold-form-label">Code postal</label>
-                    <input type="text" name="postalCode" id="postalCode" class="formbold-form-input input-value"
-                        placeholder="Votre code postal" />
-                </div>
+                    <div style="width: 100% !important;">
+                        <label for="address" class="formbold-form-label">Rue et numéro</label>
+                        <input type="text" name="address" id="address" class="formbold-form-input input-value"
+                            placeholder="Votre rue et numéro" />
+                    </div>
+                    <div>
+                        <label for="postalCode" class="formbold-form-label">Code postal</label>
+                        <input type="text" name="postalCode" id="postalCode" class="formbold-form-input input-value"
+                            placeholder="Votre code postal" />
+                    </div>
                 </div>
 
 
@@ -90,16 +90,8 @@
                             Titulaire du compte
                         </label>
                         <input type="text" name="accountHolder" id="accountHolder"
-                            class="formbold-form-input input-value" placeholder="exemple: Jean Dupont" />
+                            class="formbold-form-input readonly-input" placeholder="exemple: Jean Dupont" disabled />
                     </div>
-                    <div>
-                        <label for="bankName" class="formbold-form-label"> Nom de la banque </label>
-                        <input type="text" name="bankName" id="bankName" class="formbold-form-input input-value"
-                            placeholder="Le nom de votre banque" />
-                    </div>
-                </div>
-
-                <div class="formbold-input-flex">
                     <div class="formbold-mb-3">
                         <label for="iban" class="formbold-form-label">
                             IBAN
@@ -109,6 +101,14 @@
                         <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et
                             réessayer</div>
                     </div>
+                </div>
+
+                <div class="formbold-input-flex" style="margin-top: 20px;">
+                    <div>
+                        <label for="bankName" class="formbold-form-label"> Nom de la banque </label>
+                        <input type="text" name="bankName" id="bankName" class="formbold-form-input input-value"
+                            placeholder="Le nom de votre banque" />
+                    </div>
                     <div>
                         <label for="swift" class="formbold-form-label"> SWIFT </label>
                         <input type="text" name="swift" id="swift" class="formbold-form-input input-value"
@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                <h3 class="header-section">Informations de la carte d'identité</h3>
+                <h3 class="header-section" style="margin-top: 60px !important;">Informations de la carte d'identité</h3>
                 <div class="formbold-input-flex">
                     <div>
                         <label for="idCard" class="formbold-form-label"> Numéro de la carte d'identité </label>
