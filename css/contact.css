@@ -281,19 +281,19 @@ body {
   outline: none;
   position: relative;
   z-index: 2;
-  letter-spacing: 3.5px; /* Espacement normal */
+  letter-spacing: 6px; 
 }
 
 .mask {
   position: absolute;
   top: 15px;
-  left: 22px;
+  left: 25px;
   font-weight: 500;
   font-size: 14px;
   color: #b0b0b0;
   pointer-events: none;
   z-index: 1;
-  letter-spacing: 4px; /* Espacement pour les underscores */
+  letter-spacing: 6px; 
   white-space: nowrap;
 }
 
@@ -315,8 +315,6 @@ body {
 }
 
 
-
-
 /* PLACES API */
 .pac-container {
   z-index: 1000 !important;
@@ -325,8 +323,8 @@ body {
   font-family: 'Inter', sans-serif; 
   background-color: #ffffff; 
   border: 1px solid #005691;
-  transition: none !important; /* Désactive toute transition pour ce conteneur */
-  animation: none !important; /* Désactive toute animation pour ce conteneur */
+  transition: none !important; 
+  animation: none !important; 
 }
 
 .pac-item {
