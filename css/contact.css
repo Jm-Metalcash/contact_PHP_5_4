@@ -77,6 +77,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 .formbold-address p {
@@ -88,7 +89,6 @@ body {
   margin-bottom: 10px;
   font-size: 1rem;
   font-weight: 500;
-  margin-top: 30px;
 }
 
 .formbold-input-flex {
@@ -167,19 +167,20 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 30px;
 }
 
 .formbold-checkbox-label {
   display: flex;
   align-items: center;
-  font-size: 14px; 
+  font-size: 13px; 
   color: #536387;
   cursor: pointer;
 }
 
 .formbold-checkbox-label a {
   color: #0175c2;
-  font-size: 14px; 
+  font-size: 13px; 
   margin-left: 5px;
   text-decoration: none;
 }
@@ -212,11 +213,16 @@ body {
   border: 0.7px solid #dde3ec;
   border-radius: 3px;
 }
-
-.formbold-btn {
+.btn-submit-form {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column; 
+  width: 100%;
+  margin-top: 20px;
+}
+
+.formbold-btn {
   font-size: 15px;
   border-radius: 5px;
   padding: 14px 20px;
@@ -225,7 +231,7 @@ body {
   background-color: #005691;
   color: white;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 20px;
   transition: background-position 0.6s ease, transform 0.6s ease;
   background-size: 200% 100%;
   background-image: linear-gradient(to right, #005691 50%, #0c7bc6 50%);
@@ -236,33 +242,71 @@ body {
   background-position: left bottom;
 }
 
+
+/* PLACES API */
+.pac-container {
+  z-index: 1000 !important;
+  border-radius: 5px;
+  box-shadow: 0px 4px 15px rgba(0, 90, 255, 0.15); 
+  font-family: 'Inter', sans-serif; 
+  background-color: #ffffff; 
+  border: 1px solid #005691;
+  transition: none !important; /* Désactive toute transition pour ce conteneur */
+  animation: none !important; /* Désactive toute animation pour ce conteneur */
+}
+
+.pac-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #536387; 
+  animation: none !important;
+  transition: none !important;
+}
+
+.pac-item:hover {
+  background-color: #e0f0ff; 
+}
+
+.pac-item-query {
+  font-weight: bold;
+  color: #005691;
+  font-size: 12px;
+}
+
+.no-animation {
+  transition: none !important; /* Désactive la transition */
+  animation: none !important;  /* Désactive l'animation */
+}
+
+
 /* ERRORS MESSAGES */
 .error-message {
   color: #dc2626;
   font-size: 12px;
   margin-top: 10px;
-  opacity: 0; /* Initialement caché */
-  transform: translateY(-10px); /* Erreur légèrement au-dessus au départ */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Animation d'apparition/disparition */
+  opacity: 0; 
+  transform: translateY(-10px); 
+  transition: opacity 0.5s ease, transform 0.5s ease; 
 }
 
 .error-message.show {
-  opacity: 1; /* Affiche le message */
-  transform: translateY(0); /* Positionne correctement */
+  opacity: 1; 
+  transform: translateY(0); 
 }
 
 .form-error-message {
   color: #dc2626;
   font-size: 13px;
   margin-top: 10px;
-  opacity: 0; /* Initialement caché */
-  transform: translateY(-10px); /* Message légèrement au-dessus au départ */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Animation d'apparition/disparition */
+  opacity: 0; 
+  transform: translateY(-10px); 
+  transition: opacity 0.5s ease, transform 0.5s ease; 
 }
 
 .form-error-message.show {
-  opacity: 1; /* Affiche le message */
-  transform: translateY(0); /* Positionne correctement */
+  opacity: 1; 
+  transform: translateY(0); 
 }
 
 /* API ADDRESS FINDING */
@@ -273,7 +317,7 @@ body {
   background-color: #fff;
   border: 1px solid #ccc;
   max-width: 300px;
-  position: absolute; /* Pour que la liste soit bien positionnée sous l'input */
+  position: absolute; 
   z-index: 1000;
 }
 
@@ -341,6 +385,12 @@ body {
 
   .formbold-checkbox-label a {
     font-size: 12px; 
+  }
+
+  #ibanError {
+    position: absolute;
+    width: 300px;
+    margin-top: 0;
   }
 }
 
