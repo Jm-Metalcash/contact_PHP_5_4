@@ -12,7 +12,8 @@
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
 
-            <form action="" method="POST" autocomplete="off">
+            <form action="bordereau_achat.php" method="POST" autocomplete="off">
+                <input type="hidden" name="uniqueId" value="<?php echo random_int(1000000000, 9999999999); ?>">
                 <div class="formbold-form-title">
                     <h2 class="">Créez votre bordereau d'achat</h2>
                     <p>
@@ -160,7 +161,7 @@
                 </div>
 
                 <div class="btn-submit-form">
-                    <button class="formbold-btn">Générer le bordereau d'achat</button>
+                    <button type="submit" class="formbold-btn">Générer le bordereau d'achat</button>
                     <div id="formError" class="form-error-message">Merci de vérifier et de corriger les informations
                         avant
                         de procéder à la génération du bordereau d'achat.</div>

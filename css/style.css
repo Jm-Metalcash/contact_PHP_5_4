@@ -17,7 +17,8 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 /* SECTION CODE BARRE */
@@ -25,7 +26,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .header-title h1 {
@@ -42,21 +43,22 @@ header {
     font-size: 9px;
     color: #2a2a2a;
     position: absolute;
-    top: 7px;
-    left: 7px;
+    top: -15px;
+    left: 0px;
 }
 
 .barcode-section .id_barcode {
     font-size: 11px;
     color: #1d1d1d;
     position: absolute;
-    top: 62px;
+    font-weight: 100;
+    top: 33px;
     left: 47px;
 }
 
 .barcode-section img {
     width: 170px;
-    height: 80px;
+    height: 40px;
 }
 
 .barcode-section {
@@ -320,3 +322,38 @@ footer {
         margin: 0;
     }
 }
+
+
+    @media print {
+        /* Forcer l'affichage des éléments SVG du code-barres */
+        .barcode-section svg {
+            display: block !important;
+            visibility: visible !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        /* Assurer que la section entière du code-barres est visible à l'impression */
+        .barcode-section {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Optionnel: forcer la couleur pour les éléments qui pourraient être masqués */
+        * {
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+        }
+    }
+
+    /* Styles généraux pour améliorer la présentation du code-barres à l'écran */
+    .barcode {
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .id_barcode {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
