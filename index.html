@@ -92,16 +92,18 @@
                         <input type="text" name="accountHolder" id="accountHolder"
                             class="formbold-form-input readonly-input" disabled />
                     </div>
+
+
                     <div class="formbold-mb-3">
                         <label for="iban" class="formbold-form-label">
                             IBAN
                         </label>
-                        <input type="text" name="iban" id="iban" class="formbold-form-input input-value"
-                            placeholder="exemple: BE6800000000011" />
-                        <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et
-                            réessayer</div>
-                    </div>
+                        <input type="text" name="iban" id="iban" class="formbold-form-input input-value" placeholder="exemple: BE6800000000011" />
+                        <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et réessayer</div>
+                    </div>    
                 </div>
+
+                
 
                 <div class="formbold-input-flex" style="margin-top: 20px;">
                     <div>
@@ -172,6 +174,7 @@
     <script src="js/inputAnimation.js"></script>
     <script src="js/validateInput.js"></script>
     <script src="js/addressFindingAPI.js"></script>
+    <script src="js/IBANAPI.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSabS4IR4na718B5zm0NB0sPdgg3Da-7E&libraries=places&callback=initAutocomplete"
         defer>

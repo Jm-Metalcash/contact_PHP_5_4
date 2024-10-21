@@ -347,8 +347,8 @@ body {
 }
 
 .no-animation {
-  transition: none !important; /* Désactive la transition */
-  animation: none !important;  /* Désactive l'animation */
+  transition: none !important; 
+  animation: none !important;  
 }
 
 
