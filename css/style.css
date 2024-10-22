@@ -32,6 +32,7 @@ header {
 .header-title h1 {
     font-size: 32px;
     font-weight: bold;
+    padding: 5px 5px;   
 }
 
 .barcode-section {
@@ -71,9 +72,10 @@ header {
 /* SECTION HEADER */
 .header-info {
     text-align: center;
-    background-color: #ffff;
+    background-color: rgb(46, 46, 46);
+    color: white;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid rgb(109, 109, 109);
 }
 
 .header-info-p {

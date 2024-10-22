@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bordereau d'achat</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css?<?= rand() ?>">
     </head>
 
     <body>
@@ -148,56 +148,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Exemple de métaux -->
-                            <tr>
-                                <td>1</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Carbure de Tungstène</td>
-                                <td>Plaquettes outils</td>
-                                <td>1000</td>
-                            </tr>
-                        </tbody>
+                            <?php
+                            if (isset($_POST['materialType']) && is_array($_POST['materialType'])) {
+                                foreach ($_POST['materialType'] as $index => $type) {
+                                    $description = $_POST['description'][$index] ?? 'N/A';
+                                    $weight = $_POST['weight'][$index] ?? 'N/A';
+                                    echo '<tr>';
+                                    echo '<td>' . ($index + 1) . '</td>';
+                                    echo '<td>' . htmlspecialchars($type) . '</td>';
+                                    echo '<td>' . htmlspecialchars($description) . '</td>';
+                                    echo '<td>' . htmlspecialchars($weight) . '</td>';
+                                    echo '</tr>';
+                                }
+                            }
+                            ?>
                     </table>
                 </section>
             </main>

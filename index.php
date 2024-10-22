@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/form.css?<?= rand() ?>">
 </head>
 
 <body>
@@ -101,10 +101,10 @@
                         </label>
                         <input type="text" name="iban" id="iban" class="formbold-form-input input-value" placeholder="exemple: BE6800000000011" />
                         <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et réessayer</div>
-                    </div>    
+                    </div>
                 </div>
 
-                
+
 
                 <div class="formbold-input-flex" style="margin-top: 20px;">
                     <div>
@@ -124,7 +124,7 @@
                     <div>
                         <label for="idCard" class="formbold-form-label"> Numéro de la carte d'identité </label>
                         <input type="text" name="idCard" id="idCard" class="formbold-form-input input-value"
-                            placeholder="exemple: 000-5900000-02"/>
+                            placeholder="exemple: 000-5900000-02" />
                     </div>
                     <div class="formbold-mb-3" style="margin-bottom: 0px !important;">
                         <label for="expiryDate" class="formbold-form-label">
@@ -135,9 +135,29 @@
                             <span class="mask">__/__/____</span>
                         </div>
                         <div id="expiryError" class="error-message">La date saisie n'est pas valide. Veuillez vérifier le jour et le mois.</div>
-                                                                   
+
                     </div>
                 </div>
+
+
+                <h3 class="header-section" style="margin-top: 25px !important;">Informations sur le colis</h3>
+                <div id="materials-section">
+                    <div class="formbold-input-flex material-entry">
+                        <div>
+                            <label for="materialType" class="formbold-form-label">Type de matériaux</label>
+                            <input type="text" name="materialType[]" class="formbold-form-input" placeholder="exemple: étain" />
+                        </div>
+                        <div>
+                            <label for="weight" class="formbold-form-label">Poids en kg</label>
+                            <input type="number" step="1" name="weight[]" class="formbold-form-input" placeholder="Poids en kg" />
+                        </div>
+                        <div>
+                            <label for="description" class="formbold-form-label">Descriptif (facultatif)</label>
+                            <input type="text" name="description[]" class="formbold-form-input" placeholder="exemple: couverts" />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-material" class="btn-add">Ajouter un autre matériau</button>
 
 
                 <div class="formbold-checkbox-wrapper">
@@ -174,12 +194,13 @@
     <script src="js/main.js"></script>
     <script src="js/inputAnimation.js"></script>
     <script src="js/validateInput.js"></script>
+    <script src="js/addMaterial.js"></script>
     <script src="js/addressFindingAPI.js"></script>
     <script src="js/IBANAPI.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSabS4IR4na718B5zm0NB0sPdgg3Da-7E&libraries=places&callback=initAutocomplete"
         defer>
-        </script>
+    </script>
 </body>
 
 </html>

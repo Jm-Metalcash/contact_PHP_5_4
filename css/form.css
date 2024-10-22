@@ -39,7 +39,7 @@ body {
 
 .formbold-form-wrapper {
   margin: 60px auto;
-  max-width: 570px;
+  max-width: 700px;
   width: 100%;
   background: white;
   padding: 40px;
@@ -240,6 +240,33 @@ body {
 
 .formbold-btn:hover {
   background-position: left bottom;
+}
+
+/* Informations sur le colis */
+.material-entry {
+  opacity: 0;
+  animation: fadeInMove 0.5s ease forwards;
+}
+.btn-add {
+  background-color: #efeeee;
+  color: rgb(85, 84, 84);
+  font-weight: 500;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.btn-add:hover {
+  background-color: #e3e2e2;
+  color: rgb(85, 84, 84);
+}
+.limit-message {
+  color: #dc2626;
+  margin-top: 10px;
+  font-size: 13px;
+  margin-bottom: 30px;
 }
 
 .readonly-input {
@@ -479,5 +506,16 @@ body {
   }
   100% {
     transform: translateX(0); 
+  }
+}
+
+@keyframes fadeInMove {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
 }
