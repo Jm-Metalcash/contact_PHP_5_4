@@ -39,7 +39,7 @@ body {
 
 .formbold-form-wrapper {
   margin: 60px auto;
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
   background: white;
   padding: 40px;
@@ -77,7 +77,15 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.note-package {
+  font-size: 13px !important;
+  text-align: center;
+  margin-top: 0px !important;
   margin-bottom: 50px;
+  font-weight:300;
 }
 
 .formbold-address p {
@@ -248,10 +256,10 @@ body {
   animation: fadeInMove 0.5s ease forwards;
 }
 .btn-add {
-  background-color: #efeeee;
-  color: rgb(85, 84, 84);
+  background-color: #ffffff;
+  color: rgb(21, 21, 21);
+  border: 1px solid rgb(133, 133, 133);
   font-weight: 500;
-  border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -259,7 +267,7 @@ body {
   margin-bottom: 30px;
 }
 .btn-add:hover {
-  background-color: #e3e2e2;
+  background-color: #f4f4f4;
   color: rgb(85, 84, 84);
 }
 .limit-message {

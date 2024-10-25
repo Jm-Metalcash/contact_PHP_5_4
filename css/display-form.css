@@ -1,0 +1,110 @@
+.form-box {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95) translateX(-30px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+    width: 100%;
+}
+
+.form-box.active {
+    display: block;
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Animation slide-in */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+/* Container for the buttons */
+.choice-contact-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.choice-contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Link style buttons */
+.choice-contact-button {
+    background: none;
+    border: none;
+    color: #07074d;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+    transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+/* Active button effect */
+.choice-contact-button.active {
+    font-weight: bold;
+    opacity: 1;
+    transform: scale(1.1);
+    color: #1d1d4f;
+}
+.choice-contact-button.inactive:hover{
+    color: #1d1d4f;
+    opacity: .8;
+}
+
+/* Inactive button effect */
+.choice-contact-button.inactive {
+    opacity: 0.8;
+    font-weight: bold;
+    transform: scale(0.9);
+    color: #62628d;
+}
+
+/* Active underline effect */
+.choice-contact-button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #5252ab;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.choice-contact-button.active::after {
+    transform: scaleX(1);
+}
+
+
+
+/* Responsif pour les écrans de 450px de largeur maximale */
+@media (max-width: 450px) {
+    .choice-contact-form h2 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .choice-contact-buttons {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .choice-contact-button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
