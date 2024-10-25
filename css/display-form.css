@@ -50,6 +50,13 @@
     transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 
+.noNeccesary {
+    position: absolute;
+    font-size: 13px;
+    width: 100px;
+    bottom: 8px;
+}
+
 
 /* Active button effect */
 .choice-contact-button.active {
@@ -106,5 +113,11 @@
     .choice-contact-button {
         font-size: 16px;
         padding: 10px;
+    }
+    .noNeccesary {
+        position: relative;
+        font-size: 13px;
+        display:block;
+        margin: 7px auto;
     }
 }

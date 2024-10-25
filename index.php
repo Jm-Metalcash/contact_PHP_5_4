@@ -16,7 +16,7 @@
             <div class="choice-contact-form">
                 <div class="choice-contact-buttons">
                     <button class="choice-contact-button" id="contactButton" onclick="displayForm('form-contact-box', this)">Contactez-nous</button>
-                    <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)">Créer un bordereau</button>
+                    <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)">Créer un bordereau<span class="noNeccesary">(Envoi postal)</span></button>
                 </div>
             </div>
 
