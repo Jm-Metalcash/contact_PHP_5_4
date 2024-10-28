@@ -80,9 +80,9 @@
                         <div>
                             <label for="subject" class="formbold-form-label"> Sujet </label>
                             <select name="subject" id="subject" class="formbold-form-input input-value">
-                                <option value="informations" selected>Demandes d'informations</option>
-                                <option value="general">Demandes de rendez-vous</option>
-                                <option value="support">Grosses quantités à vendre</option>
+                                <option value="informations" selected>Demande d'informations</option>
+                                <option value="general">Demande de rendez-vous</option>
+                                <option value="support">Grosse quantité à vendre</option>
                                 <option value="other">Autre</option>
                             </select>
                         </div>
