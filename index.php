@@ -45,7 +45,7 @@
                 <p class="form-contact-description">
                     Pour toute question ou information complémentaire, n'hésitez pas à nous contacter.
                 </p>
-                <form method="POST" id="contactForm" autocomplete="off">
+                <form method="POST" action="process_contact.php" id="contactForm" autocomplete="off">
                     <div class="formbold-input-flex">
                         <div>
                             <label for="firstname" class="formbold-form-label">
@@ -65,13 +65,13 @@
                         <div>
                             <label for="email" class="formbold-form-label"> E-mail </label>
                             <input type="email" name="email" id="email" class="formbold-form-input input-value"
-                                placeholder="dupont@exemple.com" />
+                                placeholder="dupont@exemple.com" required />
                             <div id="emailError" class="error-message">Veuillez saisir une adresse e-mail valide.</div>
                         </div>
                         <div>
                             <label for="phone" class="formbold-form-label"> Numéro de téléphone </label>
                             <input type="text" name="phone" id="phone" class="formbold-form-input input-value"
-                                placeholder="Votre numéro de téléphone" />
+                                placeholder="Votre numéro de téléphone" required />
                             <div id="phoneError" class="error-message">Veuillez saisir un numéro de téléphone valide.</div>
                         </div>
                     </div>
@@ -80,18 +80,21 @@
                         <div>
                             <label for="subject" class="formbold-form-label"> Sujet </label>
                             <select name="subject" id="subject" class="formbold-form-input input-value">
-                                <option value="informations" selected>Demande d'informations</option>
-                                <option value="general">Demande de rendez-vous</option>
-                                <option value="support">Grosse quantité à vendre</option>
-                                <option value="other">Autre</option>
+                                <option value="Demande d'informations" selected>Demande d'informations</option>
+                                <option value="Demande de rendez-vous">Demande de rendez-vous</option>
+                                <option value="Grosse quantité à vendre">Grosse quantité à vendre</option>
+                                <option value="Autre">Autre</option>
                             </select>
                         </div>
                     </div>
 
+                    <!-- CAPTCHA -->
+                    <!-- <div class="g-recaptcha" data-sitekey="6Lf7n5MiAAAAAP7_TlZ0Uw2-5onMv5NbnUUSxkkX"></div> -->
+
                     <div class="formbold-input-flex">
                         <div style="width: 100%;">
                             <label for="question" class="formbold-form-label">Votre message</label>
-                            <textarea name="question" id="question" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..."></textarea>
+                            <textarea name="question" id="question" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..." required></textarea>
                         </div>
                     </div>
 
@@ -301,6 +304,8 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSabS4IR4na718B5zm0NB0sPdgg3Da-7E&libraries=places&callback=initAutocomplete"
         defer>
     </script>
+    <script src="js/recaptchaValidation.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 </body>
