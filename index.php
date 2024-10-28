@@ -7,25 +7,102 @@
     <title>Contact</title>
     <link rel="stylesheet" href="css/display-form.css" <?= rand() ?>">
     <link rel="stylesheet" href="css/form-bordereau.css" <?= rand() ?>">
+    <link rel="stylesheet" href="css/form-contact.css" <?= rand() ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
 
+            <!-- Appointment Info Section -->
+            <div class="appointment-info">
+                <h3 class="appointment-title">Prendre rendez-vous ?</h3>
+                <p class="appointment-description">
+                    <i class="fas fa-phone-alt phone-icon"></i>
+                    <a href="tel:+32474011293" class="phone-link">+32 474 01 12 93</a>
+                </p>
+                <p class="appointment-hours">
+                    Disponible du <strong>lundi au vendredi</strong>, de <strong>9h à 16h</strong>.
+                </p>
+            </div>
+
+
             <div class="choice-contact-form">
+                <p>Que souhaitez-vous faire ?</p>
                 <div class="choice-contact-buttons">
-                    <button class="choice-contact-button" id="contactButton" onclick="displayForm('form-contact-box', this)">Contactez-nous</button>
-                    <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)">Créer un bordereau<span class="noNeccesary">(Envoi postal)</span></button>
+                    <button class="choice-contact-button" id="contactButton" onclick="displayForm('form-contact-box', this)"><i class="fa-regular fa-envelope"></i> Nous contacter</button>
+                    <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)"><i class="fa-regular fa-file-lines"></i> Créer un bordereau<span class="noNeccesary">(Envoi postal)</span></button>
                 </div>
             </div>
 
             <!-- FORM CONTACT US -->
             <div id="form-contact-box" class="form-box">
-                <h2 class="form-contact-title">Contactez-nous</h2>
+                <div class="formbold-form-title">
+                    <h2 class="">Contactez-nous</h2>
+
+                </div>
                 <p class="form-contact-description">
-                    Pour toute question ou problème lié à votre commande, n'hésitez pas à nous contacter.
+                    Pour toute question ou information complémentaire, n'hésitez pas à nous contacter.
                 </p>
+                <form method="POST" id="contactForm" autocomplete="off">
+                    <div class="formbold-input-flex">
+                        <div>
+                            <label for="firstname" class="formbold-form-label">
+                                Prénom
+                            </label>
+                            <input type="text" name="firstname" id="firstname" class="formbold-form-input input-value"
+                                placeholder="Votre prénom" />
+                        </div>
+                        <div>
+                            <label for="lastname" class="formbold-form-label"> Nom de famille </label>
+                            <input type="text" name="lastname" id="lastname" class="formbold-form-input input-value"
+                                placeholder="Votre nom de famille" />
+                        </div>
+                    </div>
+
+                    <div class="formbold-input-flex">
+                        <div>
+                            <label for="email" class="formbold-form-label"> E-mail </label>
+                            <input type="email" name="email" id="email" class="formbold-form-input input-value"
+                                placeholder="dupont@exemple.com" />
+                            <div id="emailError" class="error-message">Veuillez saisir une adresse e-mail valide.</div>
+                        </div>
+                        <div>
+                            <label for="phone" class="formbold-form-label"> Numéro de téléphone </label>
+                            <input type="text" name="phone" id="phone" class="formbold-form-input input-value"
+                                placeholder="Votre numéro de téléphone" />
+                            <div id="phoneError" class="error-message">Veuillez saisir un numéro de téléphone valide.</div>
+                        </div>
+                    </div>
+
+                    <div class="formbold-input-flex">
+                        <div>
+                            <label for="subject" class="formbold-form-label"> Sujet </label>
+                            <select name="subject" id="subject" class="formbold-form-input input-value">
+                                <option value="informations" selected>Demandes d'informations</option>
+                                <option value="general">Demandes de rendez-vous</option>
+                                <option value="support">Grosses quantités à vendre</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="formbold-input-flex">
+                        <div style="width: 100%;">
+                            <label for="message" class="formbold-form-label">Votre message</label>
+                            <textarea name="message" id="message" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..."></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="btn-submit-form">
+                        <button type="submit" class="formbold-btn">Envoyer votre message</button>
+                        <div id="formError" class="form-error-message">Merci de vérifier et de corriger les informations
+                            avant
+                            de procéder à la génération du bordereau d'achat.</div>
+                    </div>
+                </form>
             </div>
             <!-- END FORM CONTACT US -->
 

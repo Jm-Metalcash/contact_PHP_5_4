@@ -1,0 +1,79 @@
+/* HEADER */
+.form-contact-description {
+    color: #07074d;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 50px;
+}
+.choice-contact-form p {
+    margin: 0;
+    font-size: 18px;
+    color: #1d1d4f;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.appointment-info {
+    background-color: #EBF8FF;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0px auto;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 80px;
+}
+
+.appointment-info:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.appointment-title {
+    font-size: 22px;
+    color: #2B6CB0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.appointment-description {
+    font-size: 16px;
+    color: #f4f4f4;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.phone-icon {
+    color: #2B6CB0;
+    font-size: 20px;
+}
+
+.phone-link {
+    color: #2B6CB0;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.phone-link:hover {
+    color: #3484da;
+    transform: translateY(-2px);
+    text-decoration: underline;
+}
+
+.appointment-hours {
+    font-size: 14px;
+    color: #2B6CB0;
+    margin-top: 10px;
+}
+
+.formbold-form-input::placeholder {
+    text-align: left;
+}
+
+
+
