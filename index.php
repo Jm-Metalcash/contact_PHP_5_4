@@ -90,8 +90,8 @@
 
                     <div class="formbold-input-flex">
                         <div style="width: 100%;">
-                            <label for="message" class="formbold-form-label">Votre message</label>
-                            <textarea name="message" id="message" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..."></textarea>
+                            <label for="question" class="formbold-form-label">Votre message</label>
+                            <textarea name="question" id="question" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..."></textarea>
                         </div>
                     </div>
 

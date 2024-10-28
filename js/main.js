@@ -1,5 +1,6 @@
 //CONSTANTES & VARIABLES
 const selectInputs = document.querySelectorAll('input');
+const textareaQuestion = document.getElementById('question');
 const firstnameInput = document.getElementById("firstname");
 const lastnameInput = document.getElementById("lastname");
 const accountHolderInput = document.getElementById("accountHolder");
@@ -11,9 +12,31 @@ document.querySelector('form').addEventListener('keydown', function(event) {
     }
 });
 
-// Passe au prochain input quand on appuie sur "enter"
+// Ajoute un écouteur d'événement pour le textarea "question" pour gérer la touche "Enter"
+textareaQuestion.addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Empêche le comportement par défaut
+
+        // Obtenir la position du curseur
+        const cursorPosition = textareaQuestion.selectionStart;
+        
+        // Insérer un saut de ligne à la position actuelle du curseur
+        const textBefore = textareaQuestion.value.substring(0, cursorPosition);
+        const textAfter = textareaQuestion.value.substring(textareaQuestion.selectionEnd);
+        
+        // Mettre à jour la valeur du textarea avec le saut de ligne inséré
+        textareaQuestion.value = textBefore + "\n" + textAfter;
+
+        // Positionner le curseur juste après le saut de ligne
+        textareaQuestion.selectionStart = textareaQuestion.selectionEnd = cursorPosition + 1;
+    }
+});
+
+
+// Ajoute un écouteur d'événements pour les autres inputs
 selectInputs.forEach((input, index) => {
     input.addEventListener('keydown', function(event) {
+        // Vérifie si la touche "Enter" est pressée
         if (event.key === "Enter") {
             event.preventDefault(); // Empêche la soumission du formulaire
             const nextInput = selectInputs[index + 1]; // Sélectionne l'input suivant
@@ -23,6 +46,7 @@ selectInputs.forEach((input, index) => {
         }
     });
 });
+
 
 
 function updateAccountHolder() {
