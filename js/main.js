@@ -3,7 +3,11 @@ const selectInputs = document.querySelectorAll('input');
 const textareaQuestion = document.getElementById('question');
 const firstnameInput = document.getElementById("firstname");
 const lastnameInput = document.getElementById("lastname");
-const accountHolderInput = document.getElementById("accountHolder");
+
+const bordereauForm = document.getElementById("bordereauForm");
+const firstnameInputBordereau = bordereauForm.querySelector("#firstname");
+const lastnameInputBordereau = bordereauForm.querySelector("#lastname");
+const accountHolderInput = bordereauForm.querySelector("#accountHolder");
 
 //Empêcher d'envoyer le formulaire avec "enter"
 document.querySelector('form').addEventListener('keydown', function(event) {
@@ -50,8 +54,8 @@ selectInputs.forEach((input, index) => {
 
 
 function updateAccountHolder() {
-    const firstname = firstnameInput.value;
-    const lastname = lastnameInput.value;
+    const firstname = firstnameInputBordereau.value;
+    const lastname = lastnameInputBordereau.value;
 
     // Combiner les deux valeurs avec un espace entre
     const combinedName = `${firstname} ${lastname}`.trim();
@@ -61,5 +65,5 @@ function updateAccountHolder() {
 }
 
 // Écouteurs d'événement pour détecter les changements dans les champs prénom et nom de famille
-firstnameInput.addEventListener("input", updateAccountHolder);
-lastnameInput.addEventListener("input", updateAccountHolder);
+firstnameInputBordereau.addEventListener("input", updateAccountHolder);
+lastnameInputBordereau.addEventListener("input", updateAccountHolder);

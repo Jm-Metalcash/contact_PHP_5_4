@@ -10,6 +10,84 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+.download-pdf {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 770px;
+    margin: 40px auto 0 auto;
+}
+
+/* BUTTON DOWNLOAD */
+.btn-slide2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 200px;
+    line-height: 50px;
+    padding: 0;
+    border-radius: 50px;
+    background: #fdfdfd;
+    border: 2px solid #b91c1c;
+    margin: 10px;
+    transition: .5s;
+}
+
+.btn-slide2:hover {
+    background-color: #b91c1c;
+}
+
+.btn-slide2:hover span.circle2 {
+    left: 100%;
+    margin-left: -45px;
+    background-color: #fdfdfd;
+    color: #b91c1c;
+}
+
+.btn-slide2:hover span.title2 {
+    left: 40px;
+    opacity: 0;
+}
+
+.btn-slide2:hover span.title-hover2 {
+    opacity: 1;
+    left: 40px;
+}
+
+.btn-slide2 span.circle2 {
+    display: flex; /* Pour centrer l'icône à l'intérieur */
+    align-items: center;
+    justify-content: center;
+    background-color: #b91c1c;
+    color: #fff;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 3px;
+    left: 5px;
+    transition: .5s;
+    border-radius: 50%;
+}
+
+.btn-slide2 span.title2,
+.btn-slide2 span.title-hover2 {
+    position: absolute;
+    left: 60px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #b91c1c;
+    transition: .5s;
+}
+
+.btn-slide2 span.title-hover2 {
+    color: #fff;
+    opacity: 0;
+}
+/* END BUTTON DOWNLOAD */
+
+
 .container {
     max-width: 770px;
     margin: 0 auto;
@@ -334,6 +412,10 @@ footer {
 
 /* Styles spécifiques pour l'impression */
 @media print {
+    .download-pdf {
+        display:none;
+    }
+    
     .background-image {
         width: 115%;
         opacity: 0.03;

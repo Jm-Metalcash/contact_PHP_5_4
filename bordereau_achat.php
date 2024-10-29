@@ -73,10 +73,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <title>Bordereau d'achat</title>
         <link rel="stylesheet" href="css/bordereau.css?<?= rand() ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body>
-        <button id="downloadPdf" class="download-button">Télécharger le PDF</button>
+        <div class="download-pdf">
+            <div id="downloadPdf">
+                <a href="#" class="btn-slide2">
+                    <span class="circle2"><i class="fa fa-download"></i></span>
+                    <span class="title-hover2">Télécharger </span>
+                    <span class="title2">Télécharger PDF</span>
+                </a>
+            </div>
+        </div>
+
         <div class="container">
             <header>
                 <div class="header-barcode">
