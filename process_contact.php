@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img src='./images/logo-HD.png' alt='Metalcash Logo' style='max-width: 150px; margin-bottom: 10px;' />
         </div>
         <div style='padding: 20px;'>
-            <h2 style='color: #333; font-size: 24px; margin-bottom: 20px;'>Nouveau message de contact</h2>
+            <h2 style='color: #333; font-size: 24px; margin-bottom: 20px;'>Nouveau message de $firstname $lastname</h2>
             <p style='color: #555; font-size: 16px; margin-bottom: 10px;'><strong>Nom complet :</strong> $firstname $lastname</p>
             <p style='color: #555; font-size: 16px; margin-bottom: 10px;'><strong>E-mail :</strong> <a href='mailto:$email' style='color: #1d72b8; text-decoration: none;'>$email</a></p>
             <p style='color: #555; font-size: 16px; margin-bottom: 10px;'><strong>Téléphone :</strong> $phone</p>

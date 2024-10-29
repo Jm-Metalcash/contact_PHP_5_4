@@ -442,7 +442,23 @@ body {
   background-color: #eee;
 }
 
+#add-material {
+  margin-bottom: 0 !important;
+}
 
+/* SECTION COLIS */
+.package-number {
+ background-color: #f9fbff;
+ border: 1px solid #536387;
+ padding: 20px 20px;
+ margin-bottom: 20px;
+}
+
+.package-number h4 {
+  color: #536387;
+  margin-bottom: 10px;
+}
+/* END SECTION COLIS */
 
 
 /* Media query for mobile screens */

@@ -240,24 +240,12 @@
                     </div>
 
 
-                    <h3 class="header-section" style="margin-top: 25px !important;">Informations sur le colis</h3>
-                    <div id="materials-section">
-                        <div class="formbold-input-flex material-entry">
-                            <div>
-                                <label for="materialType" class="formbold-form-label">Type de matériaux</label>
-                                <input type="text" name="materialType[]" id="materialType" class="formbold-form-input" placeholder="exemple: étain" />
-                            </div>
-                            <div>
-                                <label for="weight" class="formbold-form-label">Poids en kg</label>
-                                <input type="number" step="1" name="weight[]" id="weight" class="formbold-form-input" placeholder="Poids en kg" />
-                            </div>
-                            <div>
-                                <label for="description" class="formbold-form-label">Descriptif (facultatif)</label>
-                                <input type="text" name="description[]" id="description" class="formbold-form-input" placeholder="exemple: couverts" />
-                            </div>
-                        </div>
+                    <h3 class="header-section" style="margin-top: 25px !important;">Informations sur le(s) colis</h3>
+                    <div>
+                        <label for="packageNumber" class="formbold-form-label">Veuillez indiquer le nombre de colis que vous souhaitez envoyer</label>
+                        <input type="number" step="1" name="packageNumber" id="packageNumber" class="formbold-form-input" placeholder="Nombre de colis à envoyer" style="width: 50%; margin-bottom: 20px;" />
                     </div>
-                    <button type="button" id="add-material" class="btn-add">Ajouter un autre matériau</button>
+                    <div id="packagesContainer"></div>
 
 
                     <div class="formbold-checkbox-wrapper">

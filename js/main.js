@@ -4,10 +4,10 @@ const textareaQuestion = document.getElementById('question');
 const firstnameInput = document.getElementById("firstname");
 const lastnameInput = document.getElementById("lastname");
 
-const bordereauForm = document.getElementById("bordereauForm");
-const firstnameInputBordereau = bordereauForm.querySelector("#firstname");
-const lastnameInputBordereau = bordereauForm.querySelector("#lastname");
-const accountHolderInput = bordereauForm.querySelector("#accountHolder");
+const bordereauFormSelected = document.getElementById("bordereauForm");
+const firstnameInputBordereau = bordereauFormSelected.querySelector("#firstname");
+const lastnameInputBordereau = bordereauFormSelected.querySelector("#lastname");
+const accountHolderInput = bordereauFormSelected.querySelector("#accountHolder");
 
 //Empêcher d'envoyer le formulaire avec "enter"
 document.querySelector('form').addEventListener('keydown', function(event) {
@@ -52,7 +52,7 @@ selectInputs.forEach((input, index) => {
 });
 
 
-
+//Affiche le prénom et nom dans l'input AccountHolder dans le form bordereau
 function updateAccountHolder() {
     const firstname = firstnameInputBordereau.value;
     const lastname = lastnameInputBordereau.value;
