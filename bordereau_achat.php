@@ -72,9 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bordereau d'achat</title>
         <link rel="stylesheet" href="css/bordereau.css?<?= rand() ?>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     </head>
 
     <body>
+        <button id="downloadPdf" class="download-button">Télécharger le PDF</button>
         <div class="container">
             <header>
                 <div class="header-barcode">
@@ -188,6 +190,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </footer>
         </div>
+
+
+        <script>
+            document.getElementById('downloadPdf').addEventListener('click', function() {
+                const element = document.querySelector('.container');
+
+                html2pdf()
+                    .from(element)
+                    .set({
+                        margin: [10, 15, 10, 15],
+                        filename: 'bordereau_achat_metalcash.pdf',
+                        html2canvas: {
+                            scale: 2
+                        },
+                        jsPDF: {
+                            unit: 'mm',
+                            format: 'a4',
+                            orientation: 'portrait'
+                        }
+                    })
+                    .save();
+            });
+        </script>
+
     </body>
 
     </html>

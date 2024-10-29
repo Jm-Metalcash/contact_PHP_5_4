@@ -32,7 +32,7 @@ header {
 .header-title h1 {
     font-size: 32px;
     font-weight: bold;
-    padding: 5px 5px;   
+    padding: 5px 5px;
 }
 
 .barcode-section {
@@ -66,6 +66,7 @@ header {
     font-size: 14px;
     margin-top: 5px;
 }
+
 /* END SECTION CODE BARRE */
 
 
@@ -103,6 +104,7 @@ header {
     font-weight: bold;
     padding-bottom: 3px;
 }
+
 /* END SECTION HEADER */
 
 /* SECTION INFORMATIONS USERS */
@@ -112,6 +114,7 @@ header {
     width: 100%;
     margin-top: 20px;
 }
+
 .beneficiary-info {
     margin-top: 5px;
     display: flex;
@@ -181,7 +184,8 @@ table {
     font-family: 'Lato', sans-serif;
 }
 
-th, td {
+th,
+td {
     padding: 10px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -209,7 +213,8 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-th:nth-child(4), td:nth-child(4) {
+th:nth-child(4),
+td:nth-child(4) {
     text-align: center;
 }
 
@@ -223,15 +228,16 @@ footer {
     font-size: 11px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    /* align-items: flex-start;
     position: fixed;
-    bottom: 0;
+    bottom: 0; */
 }
 
 
 .footer-content {
     margin-top: 30px;
-    width: 70%; /* Texte à gauche, prend 65% de l'espace */
+    width: 70%;
+    /* Texte à gauche, prend 65% de l'espace */
     margin-bottom: 20px;
 }
 
@@ -262,10 +268,12 @@ footer {
 
 .signature-section {
     margin-top: 70px;
-    width: 40%; /* Signature à droite, prend 30% de l'espace */
+    width: 40%;
+    /* Signature à droite, prend 30% de l'espace */
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Aligner la signature à droite */
+    align-items: flex-start;
+    /* Aligner la signature à droite */
 }
 
 .signature-section .signature-line {
@@ -286,24 +294,49 @@ footer {
     position: absolute;
     top: 43%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    width: 34%; 
-    opacity: 0.03; 
-    z-index: 10; 
-    pointer-events: none; 
+    transform: translate(-50%, -50%);
+    width: 34%;
+    opacity: 0.03;
+    z-index: 10;
+    pointer-events: none;
 }
 
 .background-image img {
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
 }
 
+
+/* Styles généraux pour améliorer la présentation du code-barres à l'écran */
+.barcode {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.id_barcode {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.background-image {
+    width: 100%;
+    opacity: 0.03;
+    position: fixed;
+    top: 38%;
+    left: 87%;
+    transform: translate(-50%, -50%);
+}
+
+.background-image img {
+    width: 27%;
+    height: auto;
+}
 
 /* Styles spécifiques pour l'impression */
 @media print {
     .background-image {
-        width: 115%; 
-        opacity: 0.03; 
+        width: 115%;
+        opacity: 0.03;
         position: fixed;
         top: 52%;
         left: 50%;
@@ -311,7 +344,7 @@ footer {
     }
 
     .background-image img {
-        width: 100%; 
+        width: 100%;
         height: auto;
     }
 
@@ -325,39 +358,29 @@ footer {
     body {
         margin: 0;
     }
+
+    .barcode-section svg {
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Assurer que la section entière du code-barres est visible à l'impression */
+    .barcode-section {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    /* Optionnel: forcer la couleur pour les éléments qui pourraient être masqués */
+    * {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    footer {
+        align-items: flex-start;
+        position: fixed;
+        bottom: 0;
+    }
 }
-
-
-    @media print {
-        /* Forcer l'affichage des éléments SVG du code-barres */
-        .barcode-section svg {
-            display: block !important;
-            visibility: visible !important;
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        /* Assurer que la section entière du code-barres est visible à l'impression */
-        .barcode-section {
-            display: block !important;
-            visibility: visible !important;
-        }
-        
-        /* Optionnel: forcer la couleur pour les éléments qui pourraient être masqués */
-        * {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-        }
-    }
-
-    /* Styles généraux pour améliorer la présentation du code-barres à l'écran */
-    .barcode {
-        margin-top: 10px;
-        display: inline-block;
-    }
-
-    .id_barcode {
-        margin-top: 10px;
-        font-weight: bold;
-    }
-
