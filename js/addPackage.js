@@ -1,45 +1,64 @@
-// Fonction qui permet d'ajouter un div selon le nombre de colis
-document.getElementById('packageNumber').addEventListener('input', function() {
-    const packageNumber = parseInt(this.value) || 0;
-    const packagesContainer = document.getElementById('packagesContainer');
+const packagesContainer = document.getElementById('packagesContainer');
+let currentPackageCount = 0; // Compte actuel des colis affichés
 
-    // Réinitialiser le conteneur
-    packagesContainer.innerHTML = '';
+//Désactive le scroll dans l'input
+document.getElementById('packageNumber').addEventListener('wheel', function(event) {
+    event.preventDefault();
+});
 
-    for (let i = 1; i <= packageNumber; i++) {
-        const packageDiv = document.createElement('div');
-        packageDiv.classList.add('package-number');
-        packageDiv.innerHTML = `
-            <h4>Colis ${i}</h4>
-            <div class="materials-section" id="materials-section-${i}">
-                <div class="formbold-input-flex material-entry">
-                    <div>
-                        <label class="formbold-form-label">Type de matériaux</label>
-                        <input type="text" name="materialType[${i}][]" class="formbold-form-input" placeholder="exemple: étain" />
-                    </div>
-                    <div>
-                        <label class="formbold-form-label">Poids en kg</label>
-                        <input type="number" step="1" name="weight[${i}][]" class="formbold-form-input" placeholder="Poids en kg" />
-                    </div>
-                    <div>
-                        <label class="formbold-form-label">Descriptif (facultatif)</label>
-                        <input type="text" name="description[${i}][]" class="formbold-form-input" placeholder="exemple: couverts" />
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn-add add-material-button" data-package-id="${i}">Ajouter un autre matériau</button>
-        `;
-        packagesContainer.appendChild(packageDiv);
+document.getElementById('packageNumber').addEventListener('change', function() {
+    const packageNumber = parseInt(this.value) || currentPackageCount; // Garde la valeur actuelle si input vide
+
+    // Si le nombre de colis est supérieur au nombre actuel, ajoute seulement les nouveaux colis
+    if (packageNumber > currentPackageCount) {
+        for (let i = currentPackageCount + 1; i <= packageNumber; i++) {
+            addPackageSection(i);
+        }
+    } 
+    // Si le nombre de colis est inférieur au nombre actuel, retire seulement les colis en excès
+    else if (packageNumber < currentPackageCount) {
+        for (let i = currentPackageCount; i > packageNumber; i--) {
+            const packageDiv = document.getElementById(`package-${i}`);
+            if (packageDiv) packageDiv.remove();
+        }
     }
 
-    // Ajouter l'événement pour chaque bouton d'ajout de matériau
-    document.querySelectorAll('.add-material-button').forEach(button => {
-        button.addEventListener('click', function() {
-            const packageId = button.getAttribute('data-package-id');
-            addMaterial(packageId);
-        });
-    });
+    // Mettre à jour le nombre de colis affichés
+    currentPackageCount = packageNumber;
 });
+
+// Fonction pour ajouter un nouveau colis
+function addPackageSection(index) {
+    const packageDiv = document.createElement('div');
+    packageDiv.classList.add('package-number');
+    packageDiv.id = `package-${index}`;
+    packageDiv.innerHTML = `
+        <h4>Colis ${index}</h4>
+        <div class="materials-section" id="materials-section-${index}">
+            <div class="formbold-input-flex material-entry">
+                <div>
+                    <label class="formbold-form-label">Type de matériaux</label>
+                    <input type="text" name="materialType[${index}][]" class="formbold-form-input" placeholder="exemple: étain" />
+                </div>
+                <div>
+                    <label class="formbold-form-label">Poids en kg</label>
+                    <input type="number" step="1" min="0" name="weight[${index}][]" class="formbold-form-input weight-selected" placeholder="Poids en kg" />
+                </div>
+                <div>
+                    <label class="formbold-form-label">Descriptif (facultatif)</label>
+                    <input type="text" name="description[${index}][]" class="formbold-form-input" placeholder="exemple: couverts" />
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn-add add-material-button" data-package-id="${index}">Ajouter un autre matériau</button>
+    `;
+    packagesContainer.appendChild(packageDiv);
+
+    // Ajouter un écouteur d'événement pour le bouton d'ajout de matériau
+    packageDiv.querySelector('.add-material-button').addEventListener('click', function() {
+        addMaterial(index);
+    });
+}
 
 // Fonction pour créer un champ d'entrée dans le formulaire
 function createInputField(labelText, name, type = 'text', placeholder = '', step = null) {
@@ -66,7 +85,6 @@ function addMaterial(packageId) {
     const materialsSection = document.getElementById(`materials-section-${packageId}`);
     const materialEntries = materialsSection.getElementsByClassName('material-entry');
 
-    // Limite fixée à 8 entrées par colis
     if (materialEntries.length >= 5) {
         alert('Limite de matériaux atteinte pour ce colis.');
         return;
@@ -75,7 +93,6 @@ function addMaterial(packageId) {
     const newMaterialEntry = document.createElement('div');
     newMaterialEntry.className = 'formbold-input-flex material-entry';
 
-    // Ajouter les champs "Type de matériaux", "Poids en kg" et "Descriptif"
     newMaterialEntry.appendChild(createInputField('Type de matériaux', `materialType[${packageId}][]`, 'text', 'exemple: étain'));
     newMaterialEntry.appendChild(createInputField('Poids en kg', `weight[${packageId}][]`, 'number', 'Poids en kg', '1'));
     newMaterialEntry.appendChild(createInputField('Descriptif (facultatif)', `description[${packageId}][]`, 'text', 'exemple: couverts'));
