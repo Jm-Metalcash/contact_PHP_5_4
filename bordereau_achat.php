@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['materialType']) && is_array($_POST['materialType'])) {
             foreach ($_POST['materialType'] as $packageId => $materials) {
                 $currentUniqueId = $uniqueId . '-' . '00' . $packageId;
+                
         ?>
 
                 <div class="download-pdf downloadPdfButton" data-package-id="<?php echo $packageId; ?>">
@@ -93,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="container bordereau" id="bordereau-<?php echo $packageId; ?>">
+                    
                     <header>
                         <div class="header-barcode">
                             <div class="header-title">
@@ -116,9 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </header>
 
                     <main>
-                        <!-- <div class="background-image">
-                            <img src="./images/logo-HD.png" alt="logo metalcash" />
-                        </div> -->
 
                         <div class="separation-benificiary"></div>
                         <section class="beneficiary-info">
@@ -204,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 downloadButton.style.visibility = 'hidden';
 
                 const options = {
-                    margin: [10, 15, 10, 15],
+                    margin: [10, 10, 10, 13],
                     filename: 'bordereau_achat_metalcash_colis_' + packageId + '.pdf',
                     html2canvas: {
                         scrollX: 0,
@@ -225,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             }
         </script>
+
 
     </body>
 
