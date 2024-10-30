@@ -112,7 +112,7 @@
             <!-- FORM BORDEREAU GENERATE -->
             <div id="form-bordereau-box" class="form-box">
                 <form action="bordereau_achat.php" method="POST" id="bordereauForm" autocomplete="off">
-                    <input type="hidden" name="uniqueId" value="<?php echo random_int(1000000000, 9999999999); ?>">
+                    <input type="hidden" name="uniqueId" value="<?php echo random_int(1000000000000, 9999999999999); ?>">
                     <div class="formbold-form-title">
                         <h2 class="">Créez votre bordereau d'achat</h2>
                         <p>

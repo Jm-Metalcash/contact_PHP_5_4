@@ -90,7 +90,7 @@ body {
 .pdf-container {
     border: 1px solid black;
     width: 850px;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
 }
 
 .container.bordereau {
@@ -338,7 +338,7 @@ footer {
 }
 
 .signature-section {
-    margin-top: 70px;
+    margin-top: 50px;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -428,7 +428,7 @@ footer {
 .informations-cut {
     display: inline-block;
     position: relative;
-    right: 80px;
+    right: 45px;
     text-align: center;
     margin-top: 30px;
     padding-left: 30px;
@@ -448,9 +448,9 @@ footer {
 }
 
 .cut-packageId {
-    width: 300px;
+    width: 200px;
     position: absolute;
-    left: 250px;
+    left: 335px;
     top: 30%;
     transform: translateY(-50%);
     font-size: 40px;

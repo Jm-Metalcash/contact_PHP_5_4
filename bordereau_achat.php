@@ -6,8 +6,26 @@ require 'vendor/autoload.php';
 
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
+// Dossier des codes-barres
+$barcodeDir = __DIR__ . '/images/barcodes/';
+
+// Fonction pour vider le dossier des codes-barres
+function clearBarcodeDirectory($directory) {
+    if (is_dir($directory)) {
+        $files = glob($directory . '/*'); // Obtenir tous les fichiers du dossier
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Supprimer chaque fichier
+            }
+        }
+    }
+}
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Vider le dossier des codes-barres avant de générer de nouveaux codes
+    clearBarcodeDirectory($barcodeDir);
+
     // Récupérer l'ID unique numérique envoyé avec le formulaire
     if (!isset($_POST['uniqueId'])) {
         die('Erreur : Aucun ID unique fourni.');
@@ -15,33 +33,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $uniqueId = htmlspecialchars($_POST['uniqueId']);
 
-    // Dossier des codes-barres
-    $barcodeDir = __DIR__ . '/images/barcodes/';
+    // Créer le dossier des codes-barres s'il n'existe pas
     if (!is_dir($barcodeDir)) {
-        mkdir($barcodeDir, 0755, true); // Créer le dossier s'il n'existe pas
+        mkdir($barcodeDir, 0755, true);
     }
 
-    // Supprimer les anciennes images de code-barres si elles existent
-    if (isset($_SESSION['barcodePaths']) && is_array($_SESSION['barcodePaths'])) {
-        foreach ($_SESSION['barcodePaths'] as $path) {
-            if (file_exists($path)) {
-                unlink($path); // Supprimer chaque ancienne image de code-barres
-            }
-        }
-    }
-
+    // Créer une instance du générateur de code-barres
     $generator = new BarcodeGeneratorPNG();
-    $barcodePaths = []; // Initialisation d'un tableau pour les chemins de code-barres
 
-    // Générer le code-barres général
+    // Générer et enregistrer le code-barres général basé sur $uniqueId
     $barcodeImageGeneral = $generator->getBarcode($uniqueId, $generator::TYPE_CODE_128);
-    $barcodePathGeneral = $barcodeDir . 'barcode-' . $uniqueId . '.png';
+    $barcodePathGeneral = $barcodeDir . 'barcode-general-' . $uniqueId . '.png';
 
+    // Écrire le code-barres général dans le fichier PNG
     if (file_put_contents($barcodePathGeneral, $barcodeImageGeneral) === false) {
-        die("Erreur : Impossible de créer l'image du code-barres général dans le dossier spécifié.");
+        die("Erreur : Impossible de créer l'image du code-barres général.");
     }
 
-    $_SESSION['barcodePathGeneral'] = $barcodePathGeneral;
+    // Enregistrer le chemin du code-barres général
+    $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId . '.png';
+
+    // Initialiser un tableau pour stocker les chemins des nouveaux codes-barres
+    $_SESSION['barcodePaths'] = [];
+
+    // Boucle pour générer un code-barres unique pour chaque colis
+    foreach ($_POST['materialType'] as $packageId => $materials) {
+        $currentUniqueId = $uniqueId . '-00' . $packageId;
+        $barcodeImage = $generator->getBarcode($currentUniqueId, $generator::TYPE_CODE_128);
+        $barcodePath = $barcodeDir . 'barcode-' . $currentUniqueId . '.png';
+
+        // Écrire l'image du code-barres dans le fichier PNG
+        if (file_put_contents($barcodePath, $barcodeImage) === false) {
+            die("Erreur : Impossible de créer l'image du code-barres pour le colis $packageId.");
+        }
+
+        // Ajouter le chemin du nouveau code-barres au tableau de session
+        $_SESSION['barcodePaths'][] = $barcodePath;
+    }
 
     $_SESSION['formData'] = [
         'firstname'   => htmlspecialchars($_POST['firstname']),
@@ -93,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Sauvegarder le chemin du code-barres dans le tableau pour chaque colis
                 $barcodePaths[] = $barcodePath;
                 $relativeBarcodePath = './images/barcodes/barcode-' . $currentUniqueId . '.png';
-                $relativeBarcodePathGeneral = './images/barcodes/barcode-' . $uniqueId . '.png';
+                $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId . '.png';
 
         ?>
                 <div class="download-pdf downloadPdfButton" data-package-id="<?php echo $packageId; ?>">
@@ -115,7 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                                 <div class="barcode-section">
                                     <p class="date">Créé le <?php echo date('d/m/Y'); ?></p>
-                                    <!-- Code-barres général à conserver -->
                                     <img src="<?php echo $relativeBarcodePathGeneral; ?>" alt="Metalcash - Bordereau ID" />
                                     <p class="id_barcode"><?php echo $uniqueId; ?></p>
                                 </div>
