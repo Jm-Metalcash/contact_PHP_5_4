@@ -21,25 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mkdir($barcodeDir, 0755, true); // Créer le dossier s'il n'existe pas
     }
 
-    // Supprimer l'ancienne image de code-barres si elle existe
-    if (isset($_SESSION['barcodePath']) && file_exists($_SESSION['barcodePath'])) {
-        unlink($_SESSION['barcodePath']); // Supprimer l'ancienne image
+    // Supprimer les anciennes images de code-barres si elles existent
+    if (isset($_SESSION['barcodePaths']) && is_array($_SESSION['barcodePaths'])) {
+        foreach ($_SESSION['barcodePaths'] as $path) {
+            if (file_exists($path)) {
+                unlink($path); // Supprimer chaque ancienne image de code-barres
+            }
+        }
     }
 
-    // Créer une instance du générateur de code-barres et générer l'image
     $generator = new BarcodeGeneratorPNG();
-    $barcodeImage = $generator->getBarcode($uniqueId, $generator::TYPE_CODE_128);
-    $barcodePath = $barcodeDir . 'barcode-' . $uniqueId . '.png';
+    $barcodePaths = []; // Initialisation d'un tableau pour les chemins de code-barres
 
-    // Écrire l'image du code-barres dans le fichier PNG
-    if (file_put_contents($barcodePath, $barcodeImage) === false) {
-        die("Erreur : Impossible de créer l'image du code-barres dans le dossier spécifié.");
+    // Générer le code-barres général
+    $barcodeImageGeneral = $generator->getBarcode($uniqueId, $generator::TYPE_CODE_128);
+    $barcodePathGeneral = $barcodeDir . 'barcode-' . $uniqueId . '.png';
+
+    if (file_put_contents($barcodePathGeneral, $barcodeImageGeneral) === false) {
+        die("Erreur : Impossible de créer l'image du code-barres général dans le dossier spécifié.");
     }
 
-    // Sauvegarder le chemin de la nouvelle image du code-barres dans la session
-    $_SESSION['barcodePath'] = $barcodePath;
+    $_SESSION['barcodePathGeneral'] = $barcodePathGeneral;
 
-    // Sauvegarder les informations du formulaire dans la session
     $_SESSION['formData'] = [
         'firstname'   => htmlspecialchars($_POST['firstname']),
         'lastname'    => htmlspecialchars($_POST['lastname']),
@@ -56,8 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'expiryDate'  => htmlspecialchars($_POST['expiryDate']),
     ];
 
-    // Utiliser un chemin relatif pour l'affichage de l'image du code-barres
-    $relativeBarcodePath = './images/barcodes/barcode-' . $uniqueId . '.png';
     $formData = $_SESSION['formData'];
 
 ?>
@@ -75,14 +76,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <body>
         <?php
-        $randomNumber = rand(1000, 9999);
         // Boucle pour générer un bordereau par colis
         if (isset($_POST['materialType']) && is_array($_POST['materialType'])) {
             foreach ($_POST['materialType'] as $packageId => $materials) {
+                // Générer un identifiant unique pour chaque colis
                 $currentUniqueId = $uniqueId . '-' . '00' . $packageId;
-                
-        ?>
 
+                // Générer le code-barres spécifique au colis
+                $barcodeImage = $generator->getBarcode($currentUniqueId, $generator::TYPE_CODE_128);
+                $barcodePath = $barcodeDir . 'barcode-' . $currentUniqueId . '.png';
+
+                if (file_put_contents($barcodePath, $barcodeImage) === false) {
+                    die("Erreur : Impossible de créer l'image du code-barres spécifique dans le dossier spécifié.");
+                }
+
+                // Sauvegarder le chemin du code-barres dans le tableau pour chaque colis
+                $barcodePaths[] = $barcodePath;
+                $relativeBarcodePath = './images/barcodes/barcode-' . $currentUniqueId . '.png';
+                $relativeBarcodePathGeneral = './images/barcodes/barcode-' . $uniqueId . '.png';
+
+        ?>
                 <div class="download-pdf downloadPdfButton" data-package-id="<?php echo $packageId; ?>">
                     <div id="downloadPdf">
                         <a href="#" class="btn-slide2" onclick="downloadPdf(<?php echo $packageId; ?>)">
@@ -94,16 +107,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="container bordereau" id="bordereau-<?php echo $packageId; ?>">
-                    
+
                     <header>
                         <div class="header-barcode">
                             <div class="header-title">
-                                <h1>Bordereau d'achat - Colis <?php echo $packageId; ?></h1>
+                                <h1>Bordereau d'achat</h1>
                             </div>
                             <div class="barcode-section">
                                 <p class="date">Créé le <?php echo date('d/m/Y'); ?></p>
-                                <img src="<?php echo $relativeBarcodePath; ?>" alt="Code-barres correspondant à l'ID" />
-                                <p class="id_barcode"><?php echo $currentUniqueId; ?></p>
+                                <!-- Code-barres général à conserver -->
+                                <img src="<?php echo $relativeBarcodePathGeneral; ?>" alt="Metalcash - Bordereau ID" />
+                                <p class="id_barcode"><?php echo $uniqueId; ?></p>
                             </div>
                         </div>
 
@@ -118,8 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </header>
 
                     <main>
-
-                        <div class="separation-benificiary"></div>
                         <section class="beneficiary-info">
                             <div class="column">
                                 <h3>Identification du bénéficiaire</h3>
@@ -175,6 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </table>
                         </section>
                     </main>
+
                     <footer>
                         <div class="footer-content">
                             <p class="accept-conditions">J’ai pris connaissance des conditions générales et de la déclaration de confidentialité et je les accepte.</p>
@@ -188,6 +201,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <p>Signature</p>
                         </div>
                     </footer>
+
+                    <div class="content-cut-out">
+                        <i class="fa-solid fa-scissors scissors-icon"></i>
+                        <p>Merci de détacher cette partie et de l'apposer sur l'emballage du colis</p>
+                        <div class="informations-cut">
+                            <!-- Code-barres spécifique au colis -->
+                            <img src="<?php echo $relativeBarcodePath; ?>" alt="Metalcash-package-id" />
+                            <span class="cut-uniqueId"><?php echo $currentUniqueId ?></span>
+                            <span class="cut-packageId">Colis <?php echo $packageId ?> / <?php echo count($_POST['materialType']); ?></span>
+                        </div>
+                    </div>
+
                 </div>
         <?php
             }
@@ -195,15 +220,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ?>
         <script>
             function downloadPdf(packageId) {
-                // Cibler le conteneur de bordereau correspondant
                 const element = document.getElementById('bordereau-' + packageId);
                 const downloadButton = document.querySelector('.download-pdf[data-package-id="' + packageId + '"]');
 
-                // Masquer le bouton de téléchargement
                 downloadButton.style.visibility = 'hidden';
 
                 const options = {
-                    margin: [10, 10, 10, 13],
+                    margin: [5, 10, 5, 13],
                     filename: 'bordereau_achat_metalcash_colis_' + packageId + '.pdf',
                     html2canvas: {
                         scrollX: 0,
@@ -219,17 +242,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 };
 
                 html2pdf().from(element).set(options).save().then(() => {
-                    // Réafficher le bouton après la génération du PDF
                     downloadButton.style.visibility = 'visible';
                 });
             }
         </script>
-
-
     </body>
 
     </html>
-
 <?php
 } else {
     echo "Erreur lors de l'envoi du formulaire, veuillez réessayer s'il vous plaît.";

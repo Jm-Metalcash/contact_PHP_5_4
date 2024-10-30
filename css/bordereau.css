@@ -101,7 +101,7 @@ body {
     background-position: center;
     background-size: 600px; /* Ajustez la taille selon vos besoins */
     position: absolute;
-    top: 10%;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -379,19 +379,114 @@ footer {
     z-index: -1; /* Place l’image en arrière-plan */
 }
 
+
+/* Zone de découpe */
+.content-cut-out {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border-top: 2px dashed #333; /* Ligne en haut pour indiquer la découpe */
+    margin-top: 20px;
+    color: #333;
+}
+
+.scissors-icon {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.content-cut-out::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+    background-image: url('../images/logo-HD.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 1;
+    width: 140px;
+    height: 140px;
+    z-index: 1;
+}
+
+.content-cut-out p {
+    padding-top: 5px;
+    padding-left: 40px;
+}
+
+.informations-cut {
+    display: inline-block;
+    position: relative;
+    right: 80px;
+    text-align: center;
+    margin-top: 30px;
+    padding-left: 30px;
+}
+
+.informations-cut img {
+    width: 250px;
+    height: 60px;
+    margin-bottom: 3px;
+}
+
+.cut-uniqueId {
+    display: block;
+    font-size: 12px;
+    color: #333;
+    margin-top: 0px;
+}
+
+.cut-packageId {
+    width: 300px;
+    position: absolute;
+    left: 250px;
+    top: 30%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: #333;
+}
+
+/* END Zone de découpe */
+
 @media print {
     .download-pdf {
         display: none;
     }
 
 
-    @page {
+    /* @page {
         margin: 25px 50px;
-    }
+    } */
 
     footer {
         align-items: flex-start;
         position: fixed;
+        bottom: 150px;
+    }
+
+
+    .content-cut-out {
+        position: fixed;
         bottom: 0;
+        width: 100%;
+        padding: 10px 0;
+        border-top: 1px dashed #333;
+        text-align: center;
+        font-size: 12px;
+        margin-top: 0px;
+    }
+
+    .scissors-icon {
+      left: -17px;
+    }
+
+    .informations-cut {
+        margin-top: 20px;
+        padding-left: 60px;
     }
 }
