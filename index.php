@@ -285,7 +285,7 @@
     <script src="js/display-form.js"></script>
     <script src="js/inputAnimation.js"></script>
     <script src="js/validateInput.js"></script>
-    <script src="js/addMaterial.js"></script>
+    <script src="js/addPackage.js"></script>
     <script src="js/addressFindingAPI.js"></script>
     <script src="js/IBANAPI.js"></script>
     <script

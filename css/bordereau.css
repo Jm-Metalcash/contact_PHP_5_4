@@ -56,7 +56,7 @@ body {
 }
 
 .btn-slide2 span.circle2 {
-    display: flex; /* Pour centrer l'icône à l'intérieur */
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #b91c1c;
@@ -87,10 +87,14 @@ body {
 }
 /* END BUTTON DOWNLOAD */
 
-
 .container {
     max-width: 770px;
     margin: 0 auto;
+    page-break-after: always; /* Forcer une nouvelle page après chaque bordereau */
+}
+
+header, main, footer {
+    page-break-inside: avoid; /* Eviter les coupures de section */
 }
 
 header {
@@ -131,7 +135,7 @@ header {
     color: #1d1d1d;
     position: absolute;
     font-weight: 100;
-    top: 33px;
+    top: 43px;
     left: 47px;
 }
 
@@ -139,14 +143,6 @@ header {
     width: 170px;
     height: 40px;
 }
-
-.barcode-section {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* END SECTION CODE BARRE */
-
 
 /* SECTION HEADER */
 .header-info {
@@ -183,10 +179,7 @@ header {
     padding-bottom: 3px;
 }
 
-/* END SECTION HEADER */
-
 /* SECTION INFORMATIONS USERS */
-
 .separation-benificiary {
     border-top: .5px solid rgb(70, 70, 70);
     width: 100%;
@@ -225,14 +218,6 @@ header {
     white-space: nowrap;
 }
 
-.column:first-child .info-grid span {
-    margin-left: 10px;
-}
-
-.column:last-child .info-grid span {
-    margin-left: 5px;
-}
-
 .card-info {
     position: absolute;
     top: 127px;
@@ -251,8 +236,6 @@ header {
     text-align: left;
 }
 
-/* END SECTION INFORMATIONS USER */
-
 /* SECTION TABLES */
 table {
     margin-top: 10px;
@@ -262,8 +245,7 @@ table {
     font-family: 'Lato', sans-serif;
 }
 
-th,
-td {
+th, td {
     padding: 10px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -282,11 +264,6 @@ th {
     opacity: .9
 }
 
-td {
-    font-size: 12px;
-    color: #333;
-}
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -296,26 +273,17 @@ td:nth-child(4) {
     text-align: center;
 }
 
-/* END SECTION TABLES */
-
-
-
 /* SECTION FOOTER */
 footer {
     margin-top: 20px;
     font-size: 11px;
     display: flex;
     justify-content: space-between;
-    /* align-items: flex-start;
-    position: fixed;
-    bottom: 0; */
 }
-
 
 .footer-content {
     margin-top: 30px;
     width: 70%;
-    /* Texte à gauche, prend 65% de l'espace */
     margin-bottom: 20px;
 }
 
@@ -347,11 +315,9 @@ footer {
 .signature-section {
     margin-top: 70px;
     width: 40%;
-    /* Signature à droite, prend 30% de l'espace */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* Aligner la signature à droite */
 }
 
 .signature-section .signature-line {
@@ -379,43 +345,11 @@ footer {
     pointer-events: none;
 }
 
-.background-image img {
-    width: 100%;
-    height: auto;
-}
-
-
-/* Styles généraux pour améliorer la présentation du code-barres à l'écran */
-.barcode {
-    margin-top: 10px;
-    display: inline-block;
-}
-
-.id_barcode {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.background-image {
-    width: 100%;
-    opacity: 0.03;
-    position: fixed;
-    top: 38%;
-    left: 87%;
-    transform: translate(-50%, -50%);
-}
-
-.background-image img {
-    width: 27%;
-    height: auto;
-}
-
-/* Styles spécifiques pour l'impression */
 @media print {
     .download-pdf {
-        display:none;
+        display: none;
     }
-    
+
     .background-image {
         width: 115%;
         opacity: 0.03;
@@ -425,39 +359,8 @@ footer {
         transform: translate(-50%, -50%);
     }
 
-    .background-image img {
-        width: 100%;
-        height: auto;
-    }
-
     @page {
-        margin-top: 25px;
-        margin-left: 50px;
-        margin-right: 50px;
-
-    }
-
-    body {
-        margin: 0;
-    }
-
-    .barcode-section svg {
-        display: block !important;
-        visibility: visible !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-
-    /* Assurer que la section entière du code-barres est visible à l'impression */
-    .barcode-section {
-        display: block !important;
-        visibility: visible !important;
-    }
-
-    /* Optionnel: forcer la couleur pour les éléments qui pourraient être masqués */
-    * {
-        -webkit-print-color-adjust: exact;
-        color-adjust: exact;
+        margin: 25px 50px;
     }
 
     footer {
