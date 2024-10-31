@@ -225,6 +225,7 @@ header {
     justify-content: space-between;
     margin-bottom: 30px;
     font-size: 12px;
+    border-top: 1px solid rgb(46, 46, 46);
 }
 
 .column {
