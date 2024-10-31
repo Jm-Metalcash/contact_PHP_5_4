@@ -90,7 +90,8 @@ body {
 .pdf-container {
     border: 1px solid black;
     width: 850px;
-    margin: 0 auto 50px auto;
+    height: 1050px;
+    margin: 0 auto 130px auto;
 }
 
 .container.bordereau {
@@ -105,7 +106,7 @@ body {
     background-image: url('../images/logo-HD.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 600px; /* Ajustez la taille selon vos besoins */
+    background-size: 800px;
     position: absolute;
     top: 0px;
     left: 50%;
@@ -128,6 +129,10 @@ header {
     margin-top: 15px;
 }
 
+.package-ref {
+    margin-left: 8px;
+}
+
 /* SECTION CODE BARRE */
 .header-barcode {
     display: flex;
@@ -145,6 +150,7 @@ header {
 .barcode-section {
     text-align: center;
     position: relative;
+    margin-right: 20px;
 }
 
 .barcode-section .date {
@@ -172,10 +178,12 @@ header {
 /* SECTION HEADER */
 .header-info {
     text-align: center;
-    background-color: rgb(46, 46, 46);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: #1d1d1d;
     padding: 10px;
-    border: 2px solid rgb(109, 109, 109);
+    border: 5px solid #1d1d1d;
+    border-radius: 20px;
+    margin: 0 10px;
 }
 
 .header-info-p {
@@ -380,9 +388,9 @@ footer {
     background-image: url('./images/logo-HD.png');
     background-repeat: repeat;
     background-position: center;
-    background-size: 20%; /* Ajuste la taille de l’image répétée */
-    opacity: 0.01; /* Réduit l’opacité pour fond discret */
-    z-index: -1; /* Place l’image en arrière-plan */
+    background-size: 20%; 
+    opacity: 0.01; 
+    z-index: -1;
 }
 
 
@@ -390,11 +398,15 @@ footer {
 .content-cut-out {
     position: relative;
     text-align: center;
-    padding: 10px;
+    padding: 0px;
     font-weight: bold;
-    border-top: 2px dashed #333; /* Ligne en haut pour indiquer la découpe */
+    border-top: 2px dashed #333;
     margin-top: 20px;
     color: #333;
+    /* width: 830px; */
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
 }
 
 .scissors-icon {
@@ -404,34 +416,27 @@ footer {
     font-size: 16px;
     color: #333;
 }
-
-.content-cut-out::before {
-    content: "";
+.scissors-icon2 {
     position: absolute;
-    top: 50%;
-    left: 8%;
-    transform: translate(-50%, -50%);
-    background-image: url('../images/logo-HD.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 1;
-    width: 140px;
-    height: 140px;
-    z-index: 1;
+    bottom: 75px;
+    left: 0;
+    font-size: 16px;
+    color: #333;
 }
+
 
 .content-cut-out p {
     padding-top: 5px;
-    padding-left: 40px;
+    padding-bottom: 5px;
+    border-bottom: 2px dashed #333;
 }
 
 .informations-cut {
     display: inline-block;
     position: relative;
-    right: 45px;
     text-align: center;
-    margin-top: 30px;
-    padding-left: 30px;
+    right: 110px;
+    top: 30px;
 }
 
 .informations-cut img {
@@ -448,9 +453,9 @@ footer {
 }
 
 .cut-packageId {
-    width: 200px;
+    width: 245px;
     position: absolute;
-    left: 335px;
+    left: 280px;
     top: 30%;
     transform: translateY(-50%);
     font-size: 40px;
@@ -464,35 +469,17 @@ footer {
         display: none;
     }
 
-
-    /* @page {
-        margin: 25px 50px;
-    } */
-
-    footer {
-        align-items: flex-start;
-        position: fixed;
-        bottom: 150px;
+    .pdf-container {
+        border: 0;
+        margin: 30px 0 0 0;
     }
 
+
+    @page {
+        margin: 0;
+    }
 
     .content-cut-out {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding: 10px 0;
-        border-top: 1px dashed #333;
-        text-align: center;
-        font-size: 12px;
-        margin-top: 0px;
-    }
-
-    .scissors-icon {
-      left: -17px;
-    }
-
-    .informations-cut {
-        margin-top: 20px;
-        padding-left: 60px;
-    }
+       margin-bottom: 20px;
+    }   
 }
