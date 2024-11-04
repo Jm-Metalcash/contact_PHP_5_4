@@ -38,11 +38,11 @@ function addPackageSection(index) {
             <div class="formbold-input-flex material-entry">
                 <div>
                     <label class="formbold-form-label">Type de matériaux</label>
-                    <input type="text" name="materialType[${index}][]" class="formbold-form-input" placeholder="exemple: étain" />
+                    <input type="text" name="materialType[${index}][]" class="formbold-form-input" placeholder="exemple: étain" required />
                 </div>
                 <div>
                     <label class="formbold-form-label">Poids en kg</label>
-                    <input type="number" step="1" min="0" name="weight[${index}][]" class="formbold-form-input weight-selected" placeholder="Poids en kg" />
+                    <input type="number" step="1" min="0" name="weight[${index}][]" class="formbold-form-input weight-selected" placeholder="Poids en kg" required />
                 </div>
                 <div>
                     <label class="formbold-form-label">Descriptif (facultatif)</label>

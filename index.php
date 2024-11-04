@@ -244,7 +244,7 @@
                         <h3 class="header-section" style="margin-top: 25px !important;">Informations sur le(s) colis</h3>
                         <div>
                             <label for="packageNumber" class="formbold-form-label">Veuillez indiquer le nombre de colis que vous souhaitez envoyer</label>
-                            <input type="number" step="1" min="1" name="packageNumber" id="packageNumber" class="formbold-form-input" placeholder="Nombre de colis à envoyer" style="width: 50%; margin-bottom: 20px;" />
+                            <input type="number" step="1" min="1" name="packageNumber" id="packageNumber" class="formbold-form-input" placeholder="Nombre de colis à envoyer" style="width: 50%; margin-bottom: 20px;" required />
                         </div>
                         <div id="packagesContainer"></div>
 
