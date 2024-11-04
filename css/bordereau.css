@@ -10,6 +10,12 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+#content {
+    background: #fff;
+    width: 900px;
+    margin: 0 auto;
+}
+
 .download-pdf {
     display: flex;
     justify-content: flex-start;
@@ -98,29 +104,29 @@ body {
     max-width: 770px;
     position: relative;
     margin: 0 auto;
-    page-break-after: always; /* Forcer une nouvelle page après chaque bordereau */
+    page-break-after: always; 
     z-index: 1;
 }
 .container.bordereau::before {
     content: "";
-    background-image: url('../images/logo-HD.png');
+    background-image: url('../images/logo-HD.webp');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 800px;
+    background-size: 100%;
     position: absolute;
     top: 0px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     height: 100%;
-    opacity: 0.05; /* Ajustez l'opacité selon vos préférences */
+    opacity: 0.05;
     z-index: -1;
-    pointer-events: none; /* Pour éviter toute interaction avec le pseudo-élément */
+    pointer-events: none; 
 }
 
 
 header, main, footer {
-    page-break-inside: avoid; /* Eviter les coupures de section */
+    page-break-inside: avoid;
 }
 
 header {
@@ -373,25 +379,16 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 20%; /* Ajuste la taille pour qu’elle soit plus petite */
-    opacity: 0.01; /* Opacité réduite pour fond discret */
-    z-index: -1; /* Place l’image en arrière-plan */
-    pointer-events: none; /* Empêche toute interaction avec l’image */
+    width: 20%; 
+    opacity: 0.01; 
+    z-index: -1; 
+    pointer-events: none;
 }
 
 .background-image img {
     width: 100%;
     height: auto;
     object-fit: cover;
-}
-
-.container.bordereau .background-image {
-    background-image: url('./images/logo-HD.png');
-    background-repeat: repeat;
-    background-position: center;
-    background-size: 20%; 
-    opacity: 0.01; 
-    z-index: -1;
 }
 
 
@@ -404,7 +401,6 @@ footer {
     border-top: 2px dashed #333;
     margin-top: 20px;
     color: #333;
-    /* width: 830px; */
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
@@ -462,8 +458,35 @@ footer {
     font-size: 40px;
     color: #333;
 }
-
 /* END Zone de découpe */
+
+
+.footer-btn-back {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.formbold-btn {
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 14px 20px;
+    border: none;
+    font-weight: 500;
+    background-color: #005691;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-position 0.6s ease, transform 0.6s ease;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, #005691 50%, #0c7bc6 50%);
+    background-position: right bottom;
+  }
+  
+  .formbold-btn:hover {
+    background-position: left bottom;
+  }
+
 
 @media print {
     .download-pdf {
