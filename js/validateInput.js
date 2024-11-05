@@ -117,8 +117,6 @@ function setupValidation(form) {
       }
 
       // Afficher le message d'erreur général
-      formError.textContent =
-        "Veuillez corriger les champs nécessaires avant de poursuivre.";
       formError.classList.add("show");
     }
   });
@@ -176,6 +174,7 @@ document.getElementById("expiryDate").addEventListener("blur", function () {
 function validateExpiryDate() {
   const expiryDateInput = document.getElementById("expiryDate").value;
   const expiryError = document.getElementById("expiryError");
+  const expiryDateError = document.getElementById("expiryDateError");
 
   // Ne pas afficher le message d'erreur si le champ est vide
   if (expiryDateInput === "") {
@@ -188,8 +187,6 @@ function validateExpiryDate() {
 
   // Vérification du format de la date
   if (!dateRegex.test(expiryDateInput)) {
-    expiryError.textContent =
-      "La date saisie n'est pas valide. Veuillez vérifier le jour et le mois.";
     expiryError.classList.add("show");
     return false;
   }
@@ -200,11 +197,10 @@ function validateExpiryDate() {
 
   // Comparer la date de la carte d'identité avec la date actuelle
   if (expiryDate < today) {
-    expiryError.textContent = "Votre carte d'identité est expirée.";
-    expiryError.classList.add("show");
+    expiryDateError.classList.add("show");
     return false;
   } else {
-    expiryError.classList.remove("show");
+    expiryDateError.classList.remove("show");
     return true;
   }
 }

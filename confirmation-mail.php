@@ -1,10 +1,14 @@
+<?php
+include 'lang/lang.fr_be.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmation</title>
+    <title>Email confirmation - Metalcash</title>
     <link rel="stylesheet" href="css/email-confirm.css" <?= rand() ?>">
 </head>
 
@@ -17,9 +21,9 @@
             </svg>
         </div>
         <div class="message-content">
-            <h1>Merci pour votre message !</h1>
-            <p>Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.</p>
-            <a href="index.php">Retour à la page d'accueil</a>
+            <h1><?= NEW_SUCCESS_EMAIL_TITLE ?></h1>
+            <p><?= NEW_SUCCESS_EMAIL_DESC ?></p>
+            <a href="index.php"><?= NEW_SUCCESS_EMAIL_BTN ?></a>
         </div>
     </div>
 </body>

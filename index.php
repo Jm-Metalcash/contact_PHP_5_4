@@ -1,3 +1,7 @@
+<?php
+include 'lang/lang.fr_be.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,73 +22,73 @@
 
                 <!-- Appointment Info Section -->
                 <div class="appointment-info">
-                    <h3 class="appointment-title">Prendre rendez-vous ?</h3>
+                    <h3 class="appointment-title"><?= APPOINTMENT_TITLE ?></h3>
                     <p class="appointment-description">
                         <i class="fas fa-phone-alt phone-icon"></i>
                         <a href="tel:+32474011293" class="phone-link">+32 474 01 12 93</a>
                     </p>
                     <p class="appointment-hours">
-                        Disponible du <strong>lundi au vendredi</strong>, de <strong>9h à 16h</strong>.
+                        <?= APPOINTMENT_HOURS ?>
                     </p>
                 </div>
 
 
                 <div class="choice-contact-form">
-                    <p>Que souhaitez-vous faire ?</p>
+                    <p><?= CHOICE_CONTACT_FORM ?></p>
                     <div class="choice-contact-buttons">
-                        <button class="choice-contact-button" id="contactButton" onclick="displayForm('form-contact-box', this)"><i class="fa-regular fa-envelope"></i> Nous contacter</button>
-                        <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)"><i class="fa-regular fa-file-lines"></i> Créer un bordereau<span class="noNeccesary">(Envoi postal)</span></button>
+                        <button class="choice-contact-button" id="contactButton" onclick="displayForm('form-contact-box', this)"><i class="fa-regular fa-envelope"></i> <?= CONTACT_BUTTON ?></button>
+                        <button class="choice-contact-button" id="bordereauButton" onclick="displayForm('form-bordereau-box', this)"><i class="fa-regular fa-file-lines"></i> <?= BORDEREAU_BUTTON ?><span class="noNeccesary">(<?= TEXT_POSTAL_DELIVERY ?>)</span></button>
                     </div>
                 </div>
 
                 <!-- FORM CONTACT US -->
                 <div id="form-contact-box" class="form-box">
                     <div class="formbold-form-title">
-                        <h2 class="">Contactez-nous</h2>
+                        <h2 class=""><?= FORM_CONTACT_TITLE ?></h2>
 
                     </div>
                     <p class="form-contact-description">
-                        Pour toute question ou information complémentaire, n'hésitez pas à nous contacter.
+                        <?= FORM_CONTACT_DESCRIPTION ?>
                     </p>
                     <form method="POST" action="process_contact.php" id="contactForm" autocomplete="off">
                         <div class="formbold-input-flex">
                             <div>
                                 <label for="firstname" class="formbold-form-label">
-                                    Prénom
+                                    <?= NEW_FIELD_FIRSTNAME ?>
                                 </label>
                                 <input type="text" name="firstname" id="firstname" class="formbold-form-input input-value"
-                                    placeholder="Votre prénom" />
+                                    placeholder="<?= NEW_PLACEHOLDER_FIRSTNAME ?>" />
                             </div>
                             <div>
-                                <label for="lastname" class="formbold-form-label"> Nom de famille </label>
+                                <label for="lastname" class="formbold-form-label"> <?= NEW_FIELD_LASTNAME ?> </label>
                                 <input type="text" name="lastname" id="lastname" class="formbold-form-input input-value"
-                                    placeholder="Votre nom de famille" />
+                                    placeholder="<?= NEW_PLACEHOLDER_LASTNAME ?>" />
                             </div>
                         </div>
 
                         <div class="formbold-input-flex">
                             <div>
-                                <label for="email" class="formbold-form-label"> E-mail </label>
+                                <label for="email" class="formbold-form-label"> <?= NEW_FIELD_EMAIL ?> </label>
                                 <input type="email" name="email" id="email" class="formbold-form-input input-value"
                                     placeholder="dupont@exemple.com" required />
-                                <div id="emailError" class="error-message">Veuillez saisir une adresse e-mail valide.</div>
+                                <div id="emailError" class="error-message"><?= NEW_ERROR_MESSAGE_EMAIL ?></div>
                             </div>
                             <div>
-                                <label for="phone" class="formbold-form-label"> Numéro de téléphone </label>
+                                <label for="phone" class="formbold-form-label"> <?= NEW_FIELD_PHONE ?> </label>
                                 <input type="text" name="phone" id="phone" class="formbold-form-input input-value"
-                                    placeholder="Votre numéro de téléphone" required />
-                                <div id="phoneError" class="error-message">Veuillez saisir un numéro de téléphone valide.</div>
+                                    placeholder="<?= NEW_PLACEHOLDER_PHONE ?>" required />
+                                <div id="phoneError" class="error-message"><?= NEW_ERROR_MESSAGE_PHONE ?></div>
                             </div>
                         </div>
 
                         <div class="formbold-input-flex">
                             <div>
-                                <label for="subject" class="formbold-form-label"> Sujet </label>
+                                <label for="subject" class="formbold-form-label"> <?= NEW_FIELD_SUBJECT ?> </label>
                                 <select name="subject" id="subject" class="formbold-form-input input-value">
-                                    <option value="Demande d'informations" selected>Demande d'informations</option>
-                                    <option value="Demande de rendez-vous">Demande de rendez-vous</option>
-                                    <option value="Grosse quantité à vendre">Grosse quantité à vendre</option>
-                                    <option value="Autre">Autre</option>
+                                    <option value="<?= NEW_MAIL_SUBJECT1 ?>" selected><?= NEW_MAIL_SUBJECT1 ?></option>
+                                    <option value="<?= NEW_MAIL_SUBJECT2 ?>"><?= NEW_MAIL_SUBJECT2 ?></option>
+                                    <option value="<?= NEW_MAIL_SUBJECT3 ?>"><?= NEW_MAIL_SUBJECT3 ?></option>
+                                    <option value="<?= NEW_MAIL_SUBJECT4 ?>"><?= NEW_MAIL_SUBJECT4 ?></option>
                                 </select>
                             </div>
                         </div>
@@ -94,17 +98,15 @@
 
                         <div class="formbold-input-flex">
                             <div style="width: 100%;">
-                                <label for="question" class="formbold-form-label">Votre message</label>
-                                <textarea name="question" id="question" class="formbold-form-input input-value" rows="8" placeholder="Écrivez votre message..." required></textarea>
+                                <label for="question" class="formbold-form-label"><?= NEW_FIELD_MESSAGE_SUBJECT ?></label>
+                                <textarea name="question" id="question" class="formbold-form-input input-value" rows="8" placeholder="<?= NEW_PLACEHOLDER_MESSAGE_SUBJECT ?>" required></textarea>
                             </div>
                         </div>
 
 
                         <div class="btn-submit-form">
-                            <button type="submit" class="formbold-btn">Envoyer votre message</button>
-                            <div id="formError" class="form-error-message">Merci de vérifier et de corriger les informations
-                                avant
-                                de procéder à la génération du bordereau d'achat.</div>
+                            <button type="submit" class="formbold-btn"><?= NEW_BTN_SUBMIT_FORM_CONTACT ?></button>
+                            <div id="formError" class="form-error-message"><?= NEW_MESSAGE_ERROR_SUBMIT_CONTACTFORM ?></div>
                         </div>
                     </form>
                 </div>
@@ -115,81 +117,81 @@
                     <form action="process_bordereau.php" method="POST" id="bordereauForm" autocomplete="off">
                         <input type="hidden" name="uniqueId" value="<?php echo random_int(1000000000000, 9999999999999); ?>">
                         <div class="formbold-form-title">
-                            <h2 class="">Créez votre bordereau d'achat</h2>
+                            <h2 class=""><?= NEW_BORDEREAU_TITLE ?></h2>
                             <p>
-                                Le bordereau est à inclure dans votre colis à destination de l'adresse suivante :
+                                <?= NEW_BORDEREAU_DESCRIPTION ?>
                             </p>
                             <div class="formbold-address">
                                 <p>Avenue André Ernst 3A, 4800 Verviers, Belgique</p>
                             </div>
-                            <p class="note-package">NOTE: Les colis pesant moins de 10kg ne sont pas acceptés.</p>
+                            <p class="note-package"><?= NEW_NOTE_BORDEREAU ?></p>
                         </div>
 
-                        <h3 class="header-section">Informations générales</h3>
+                        <h3 class="header-section"><?= TITLE_HEADER_INFORMATIONNS ?></h3>
                         <div class="formbold-input-flex">
                             <div>
                                 <label for="firstname" class="formbold-form-label">
-                                    Prénom
+                                    <?= NEW_FIELD_FIRSTNAME ?>
                                 </label>
                                 <input type="text" name="firstname" id="firstname" class="formbold-form-input input-value"
-                                    placeholder="Votre prénom" />
+                                    placeholder="<?= NEW_PLACEHOLDER_FIRSTNAME ?>" />
                             </div>
                             <div>
-                                <label for="lastname" class="formbold-form-label"> Nom de famille </label>
+                                <label for="lastname" class="formbold-form-label"> <?= NEW_FIELD_LASTNAME ?> </label>
                                 <input type="text" name="lastname" id="lastname" class="formbold-form-input input-value"
-                                    placeholder="Votre nom de famille" />
+                                    placeholder="<?= NEW_PLACEHOLDER_LASTNAME ?>" />
                             </div>
                         </div>
 
                         <div class="formbold-input-flex">
                             <div>
-                                <label for="email" class="formbold-form-label"> E-mail </label>
+                                <label for="email" class="formbold-form-label"> <?= NEW_FIELD_EMAIL ?> </label>
                                 <input type="email" name="email" id="email" class="formbold-form-input input-value"
                                     placeholder="dupont@exemple.com" />
-                                <div id="emailError" class="error-message">Veuillez saisir une adresse e-mail valide.</div>
+                                <div id="emailError" class="error-message"><?= NEW_ERROR_MESSAGE_EMAIL ?></div>
                             </div>
                             <div>
-                                <label for="phone" class="formbold-form-label"> Numéro de téléphone </label>
+                                <label for="phone" class="formbold-form-label"> <?= NEW_FIELD_PHONE ?> </label>
                                 <input type="text" name="phone" id="phone" class="formbold-form-input input-value"
-                                    placeholder="Votre numéro de téléphone" />
-                                <div id="phoneError" class="error-message">Veuillez saisir un numéro de téléphone valide.</div>
+                                    placeholder="<?= NEW_PLACEHOLDER_PHONE ?>" />
+                                <div id="phoneError" class="error-message"><?= NEW_ERROR_MESSAGE_PHONE ?></div>
                             </div>
                         </div>
 
-                        <h3 class="header-section">Adresse</h3>
+                        <h3 class="header-section"><?= TITLE_HEADER_ADDRESS ?></h3>
                         <div class="formbold-input-flex">
                             <div style="width: 100% !important;">
-                                <label for="address" class="formbold-form-label">Rue et numéro</label>
+                                <label for="address" class="formbold-form-label"><?= NEW_FIELD_ADDRESS ?></label>
                                 <input type="text" name="address" id="address" class="formbold-form-input input-value"
-                                    placeholder="Votre rue et numéro" />
+                                    placeholder="<?= NEW_PLACEHOLDER_ADDRESS ?>" />
                             </div>
                             <div>
-                                <label for="postalCode" class="formbold-form-label">Code postal</label>
+                                <label for="postalCode" class="formbold-form-label"><?= NEW_FIELD_POSTALCODE ?></label>
                                 <input type="text" name="postalCode" id="postalCode" class="formbold-form-input input-value"
-                                    placeholder="Votre code postal" />
+                                    placeholder="<?= NEW_PLACEHOLDER_POSTALCODE ?>" />
                             </div>
                         </div>
 
 
                         <div class="formbold-input-flex" style="margin-top: 15px;">
                             <div>
-                                <label for="locality" class="formbold-form-label">Localité</label>
+                                <label for="locality" class="formbold-form-label"><?= NEW_FIELD_LOCALITY ?></label>
                                 <input type="text" name="locality" id="locality" class="formbold-form-input input-value"
-                                    placeholder="Votre localité/ville" />
+                                    placeholder="<?= NEW_PLACEHOLDER_LOCALITY ?>" />
                             </div>
                             <div>
-                                <label for="country" class="formbold-form-label">Pays</label>
+                                <label for="country" class="formbold-form-label"><?= NEW_FIELD_COUNTRY ?></label>
                                 <input type="text" name="country" id="country" class="formbold-form-input input-value"
-                                    placeholder="Votre pays" />
+                                    placeholder="<?= NEW_PLACEHOLDER_COUNTRY ?>" />
                             </div>
                         </div>
 
 
-                        <h3 class="header-section" style="margin-top: 60px !important;">Coordonnées bancaires</h3>
+                        <h3 class="header-section" style="margin-top: 60px !important;"><?= TITLE_HEADER_BANK ?></h3>
                         <div class="formbold-input-flex" style="margin-bottom: 0px !important;">
                             <div class="formbold-mb-3">
                                 <label for="accountHolder" class="formbold-form-label">
-                                    Titulaire du compte
+                                    <?= NEW_FIELD_ACCOUNT_HOLDER ?>
                                 </label>
                                 <input type="text" name="accountHolder" id="accountHolder"
                                     class="formbold-form-input readonly-input" disabled />
@@ -198,10 +200,10 @@
 
                             <div class="formbold-mb-3">
                                 <label for="iban" class="formbold-form-label">
-                                    IBAN
+                                    <?= NEW_FIELD_IBAN ?>
                                 </label>
                                 <input type="text" name="iban" id="iban" class="formbold-form-input input-value" placeholder="exemple: BE6800000000011" />
-                                <div id="ibanError" class="error-message">L'IBAN fourni n'est pas valide. Veuillez vérifier et réessayer</div>
+                                <div id="ibanError" class="error-message"><?= NEW_ERROR_MESSAGE_IBAN ?></div>
                             </div>
                         </div>
 
@@ -209,42 +211,42 @@
 
                         <div class="formbold-input-flex" style="margin-top: 20px;">
                             <div>
-                                <label for="bankName" class="formbold-form-label"> Nom de la banque </label>
+                                <label for="bankName" class="formbold-form-label"> <?= NEW_FIELD_BANKNAME ?> </label>
                                 <input type="text" name="bankName" id="bankName" class="formbold-form-input input-value"
-                                    placeholder="Le nom de votre banque" />
+                                    placeholder="<?= NEW_PLACEHOLDER_BANKNAME ?>" />
                             </div>
                             <div>
-                                <label for="swift" class="formbold-form-label"> SWIFT </label>
+                                <label for="swift" class="formbold-form-label"> <?= NEW_FIELD_SWIFT ?> </label>
                                 <input type="text" name="swift" id="swift" class="formbold-form-input input-value"
                                     placeholder="exemple: ECMSBEBBXXX" />
                             </div>
                         </div>
 
-                        <h3 class="header-section" style="margin-top: 60px !important;">Informations de la carte d'identité</h3>
+                        <h3 class="header-section" style="margin-top: 60px !important;"><?= TITLE_HEADER_ID_CARD ?></h3>
                         <div class="formbold-input-flex" style="margin-bottom: 0px !important;">
                             <div>
-                                <label for="idCard" class="formbold-form-label"> Numéro de la carte d'identité </label>
+                                <label for="idCard" class="formbold-form-label"> <?= NEW_FIELD_ID_CARD ?> </label>
                                 <input type="text" name="idCard" id="idCard" class="formbold-form-input input-value"
                                     placeholder="exemple: 000-5900000-02" />
                             </div>
                             <div class="formbold-mb-3" style="margin-bottom: 0px !important;">
                                 <label for="expiryDate" class="formbold-form-label">
-                                    Date d'expiration de la carte d'identité
+                                    <?= NEW_FIELD_EXPIRY_CARD_ID ?>
                                 </label>
                                 <div class="input-wrapper">
                                     <input type="text" id="expiryDate" name="expiryDate" class="formbold-form-input masked-input" maxlength="10" placeholder="jj.mm.aaaa">
                                     <span class="mask">__/__/____</span>
                                 </div>
-                                <div id="expiryError" class="error-message">La date saisie n'est pas valide. Veuillez vérifier le jour et le mois.</div>
-
+                                <div id="expiryError" class="error-message"><?= NEW_ERROR_MESSAGE_EXPIRY_ID_CARD ?></div>
+                                <div id="expiryDateError" class="error-message"><?= NEW_ERROR_MESSAGE_EXPIRYDATE_ID_CARD ?></div>
                             </div>
                         </div>
 
 
-                        <h3 class="header-section" style="margin-top: 25px !important;">Informations sur le(s) colis</h3>
+                        <h3 class="header-section" style="margin-top: 25px !important;"><?= TITLE_HEADER_PACKAGES ?></h3>
                         <div>
-                            <label for="packageNumber" class="formbold-form-label">Veuillez indiquer le nombre de colis que vous souhaitez envoyer</label>
-                            <input type="number" step="1" min="1" name="packageNumber" id="packageNumber" class="formbold-form-input" placeholder="Nombre de colis à envoyer" style="width: 50%; margin-bottom: 20px;" required />
+                            <label for="packageNumber" class="formbold-form-label"><?= NEW_FIELD_PACKAGE_NUMBER ?></label>
+                            <input type="number" step="1" min="1" name="packageNumber" id="packageNumber" class="formbold-form-input" placeholder="<?= NEW_PLACEHOLDER_PACKAGE_NUMBER ?>" style="width: 50%; margin-bottom: 20px;" required />
                         </div>
                         <div id="packagesContainer"></div>
 
@@ -264,16 +266,14 @@
                                         </span>
                                     </div>
                                 </div>
-                                J'accepte les
-                                <a href="https://www.metalcash.be/legal" target="_blank"> termes, conditions et politique</a>
+                                <?= NEW_FIELD_FIRSTTEXT_CONDITION ?>
+                                <a href="<?= NEW_LINK_CONDITION ?>" target="_blank"> <?= NEW_FIELD_FIRSTTEXT_CONDITION ?></a>
                             </label>
                         </div>
 
                         <div class="btn-submit-form">
-                            <button type="submit" class="formbold-btn">Générer le bordereau d'achat</button>
-                            <div id="formError" class="form-error-message">Merci de vérifier et de corriger les informations
-                                avant
-                                de procéder à la génération du bordereau d'achat.</div>
+                            <button type="submit" class="formbold-btn"><?= BTN_SUBMIT_BORDEREAU ?></button>
+                            <div id="formError" class="form-error-message"><?= BTN_SUBMIT_ERROR_BORDEREAU ?></div>
                         </div>
                     </form>
                 </div>
@@ -281,6 +281,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const NEW_TEXT_INDEX_PACKAGE = "<?= NEW_TITLE_INDEX_PACKAGE ?>";
+        const NEW_TEXT_TYPE_METAL = "<?= NEW_FIELD_TYPE_METAL ?>";
+        const NEW_PLACEHLDR_TYPE_METAL = "<?= NEW_PLACEHOLDER_TYPE_METAL ?>";
+        const NEW_TEXT_WEIGHT = "<?= NEW_FIELD_WEIGHT ?>";
+        const NEW_TEXT_DESCRIPTION_PACKAGE = "<?= NEW_FIELD_DESCRIPTION_PACKAGE ?>";
+        const NEW_PLACEHLDR_DESCRIPTION_PACKAGE = "<?= NEW_PLACEHOLDER_DESCRIPTION_PACKAGE ?>"
+        const NEW_BUTTON_ADD_METAL = "<?= NEW_BTN_ADD_METAL ?>"
+
+    </script>
 
     <!-- IMPORT SCRIPTS JS -->
     <script src="js/main.js"></script>

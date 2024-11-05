@@ -1,6 +1,8 @@
 const packagesContainer = document.getElementById('packagesContainer');
 let currentPackageCount = 0; // Compte actuel des colis affichés
 
+const NEW_FIELD_INDEX_PACKAGE = "<?= NEW_FIELD_INDEX_PACKAGE ?>";
+
 //Désactive le scroll dans l'input
 document.getElementById('packageNumber').addEventListener('wheel', function(event) {
     event.preventDefault();
@@ -33,24 +35,24 @@ function addPackageSection(index) {
     packageDiv.classList.add('package-number');
     packageDiv.id = `package-${index}`;
     packageDiv.innerHTML = `
-        <h4>Colis ${index}</h4>
+        <h4>${NEW_TEXT_INDEX_PACKAGE} ${index}</h4>
         <div class="materials-section" id="materials-section-${index}">
             <div class="formbold-input-flex material-entry">
                 <div>
-                    <label class="formbold-form-label">Type de matériaux</label>
-                    <input type="text" name="materialType[${index}][]" class="formbold-form-input" placeholder="exemple: étain" required />
+                    <label class="formbold-form-label">${NEW_TEXT_TYPE_METAL}</label>
+                    <input type="text" name="materialType[${index}][]" class="formbold-form-input" placeholder="${NEW_PLACEHLDR_TYPE_METAL}" required />
                 </div>
                 <div>
-                    <label class="formbold-form-label">Poids en kg</label>
-                    <input type="number" step="1" min="0" name="weight[${index}][]" class="formbold-form-input weight-selected" placeholder="Poids en kg" required />
+                    <label class="formbold-form-label">${NEW_TEXT_WEIGHT}</label>
+                    <input type="number" step="1" min="0" name="weight[${index}][]" class="formbold-form-input weight-selected" placeholder="${NEW_TEXT_WEIGHT}" required />
                 </div>
                 <div>
-                    <label class="formbold-form-label">Descriptif (facultatif)</label>
-                    <input type="text" name="description[${index}][]" class="formbold-form-input" placeholder="exemple: couverts" />
+                    <label class="formbold-form-label">${NEW_TEXT_DESCRIPTION_PACKAGE}</label>
+                    <input type="text" name="description[${index}][]" class="formbold-form-input" placeholder="${NEW_PLACEHLDR_DESCRIPTION_PACKAGE}" />
                 </div>
             </div>
         </div>
-        <button type="button" class="btn-add add-material-button" data-package-id="${index}">Ajouter un autre matériau</button>
+        <button type="button" class="btn-add add-material-button" data-package-id="${index}">${NEW_BUTTON_ADD_METAL}</button>
     `;
     packagesContainer.appendChild(packageDiv);
 
