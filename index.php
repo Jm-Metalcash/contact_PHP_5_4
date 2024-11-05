@@ -122,7 +122,7 @@ include 'lang/lang.fr_be.php';
                                 <?= NEW_BORDEREAU_DESCRIPTION ?>
                             </p>
                             <div class="formbold-address">
-                                <p>Avenue André Ernst 3A, 4800 Verviers, Belgique</p>
+                                <p><?= NEW_BORDEREAU_ADDRESS ?></p>
                             </div>
                             <p class="note-package"><?= NEW_NOTE_BORDEREAU ?></p>
                         </div>

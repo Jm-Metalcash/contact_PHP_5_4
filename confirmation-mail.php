@@ -8,7 +8,7 @@ include 'lang/lang.fr_be.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email confirmation - Metalcash</title>
+    <title><?= NEW_TITLE_PAGE_CONFIRM_MAIL ?> - Metalcash</title>
     <link rel="stylesheet" href="css/email-confirm.css" <?= rand() ?>">
 </head>
 

@@ -1,4 +1,6 @@
 <?php
+include 'lang/lang.fr_be.php';
+
 session_start(); // Démarrer la session
 
 // Importer la bibliothèque pour le code-barres
@@ -77,7 +79,7 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bordereaux d'achat</title>
+    <title><?= NEW_TITLE_PAGE_BORDEREAU ?> - Metalcash</title>
     <link rel="stylesheet" href="css/bordereau.css?<?= rand() ?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -107,8 +109,8 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                 <div id="downloadPdf">
                     <a href="#" class="btn-slide2" onclick="downloadPdf('<?php echo $package['package_number']; ?>')">
                         <span class="circle2"><i class="fa fa-download"></i></span>
-                        <span class="title-hover2">Colis <?php echo $package['package_number']; ?></span>
-                        <span class="title2">Télécharger PDF</span>
+                        <span class="title-hover2"><?= BTN_TEXT2_DOWNLOAD_PDF ?> <?php echo $package['package_number']; ?></span>
+                        <span class="title2"><?= BTN_DOWNLOAD_PDF ?></span>
                     </a>
                 </div>
             </div>
@@ -119,48 +121,48 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                     <header>
                         <div class="header-barcode">
                             <div class="header-title">
-                                <h1>Bordereau d'achat <span class="package-ref"><?= $package['package_number'] ?>/<?= count($packages); ?></span></h1>
+                                <h1><?= TITLE_HEADER_BORDEREAU ?> <span class="package-ref"><?= $package['package_number'] ?>/<?= count($packages); ?></span></h1>
                             </div>
                             <div class="barcode-section">
-                                <p class="date">Créé le <?= date('d/m/Y'); ?></p>
+                                <p class="date"><?= DATE_GENERATE_BARRE_CODE ?> <?= date('d/m/Y'); ?></p>
                                 <img src="<?= $relativeBarcodePath; ?>" alt="Metalcash - Bordereau ID" />
                                 <p class="id_barcode"><?= $currentUniqueId ?></p>
                             </div>
                         </div>
                         <div class="header-info">
-                            <p class="header-info-p">Ce bordereau d’achat est à inclure dans votre colis à destination de l’adresse suivante :</p>
+                            <p class="header-info-p"><?= NEW_BORDEREAU_DESCRIPTION ?></p>
                             <div class="header-address">
-                                <h2>METALCASH / SERVICE D'ENVOI POSTAL</h2>
-                                <p>Avenue André Ernst 3A, 4800 Verviers, Belgique</p>
+                                <h2>METALCASH / <?= HEADER_BORDEREAU_INFORMATIONS ?></h2>
+                                <p><?= NEW_BORDEREAU_ADDRESS ?></p>
                             </div>
                         </div>
-                        <p class="note">NOTE: Les colis pesant moins de 10 kg ne sont pas acceptés (voir les conditions en bas de page).</p>
+                        <p class="note"><?= HEADER_BORDEREAU_NOTE ?></p>
                     </header>
 
                     <main>
                         <section class="beneficiary-info">
                             <div class="column">
-                                <h3>Identification du bénéficiaire</h3>
+                                <h3><?= BENEFICIARY_INFO ?></h3>
                                 <div class="info-grid">
-                                    <p>Prénom: <span><?= $formData['firstname']; ?></span></p>
-                                    <p>Nom de famille: <span><?= $formData['lastname']; ?></span></p>
-                                    <p>Rue: <span><?= $formData['address']; ?></span></p>
-                                    <p>CP, Localité: <span><?= $formData['postalCode'] . ', ' . $formData['locality']; ?></span></p>
-                                    <p>Pays: <span><?= $formData['country']; ?></span></p>
-                                    <p>Téléphone: <span><?= $formData['phone']; ?></span></p>
-                                    <p>E-mail: <span><?= $formData['email']; ?></span></p>
+                                    <p><?= NEW_FIELD_FIRSTNAME ?>: <span><?= $formData['firstname']; ?></span></p>
+                                    <p><?= NEW_FIELD_LASTNAME ?>: <span><?= $formData['lastname']; ?></span></p>
+                                    <p><?= BENEFICIARY_INFO_STREET ?>: <span><?= $formData['address']; ?></span></p>
+                                    <p><?= BENEFICIARY_INFO_LOCALITY ?>: <span><?= $formData['postalCode'] . ', ' . $formData['locality']; ?></span></p>
+                                    <p><?= NEW_FIELD_COUNTRY ?>: <span><?= $formData['country']; ?></span></p>
+                                    <p><?= BENEFICIARY_INFO_PHONE ?>: <span><?= $formData['phone']; ?></span></p>
+                                    <p><?= NEW_FIELD_EMAIL ?>: <span><?= $formData['email']; ?></span></p>
                                 </div>
                             </div>
                             <div class="column">
-                                <h3>Coordonnées bancaires</h3>
+                                <h3><?= TITLE_HEADER_BANK ?></h3>
                                 <div class="info-grid">
-                                    <p>Titulaire du compte: <span><?= $formData['firstname'] . ' ' . $formData['lastname']; ?></span></p>
-                                    <p>IBAN: <span><?= $formData['iban']; ?></span></p>
-                                    <p>Nom de la banque: <span><?= $formData['bankName']; ?></span></p>
-                                    <p>SWIFT: <span><?= $formData['swift']; ?></span></p>
+                                    <p><?= NEW_FIELD_ACCOUNT_HOLDER ?>: <span><?= $formData['firstname'] . ' ' . $formData['lastname']; ?></span></p>
+                                    <p><?= NEW_FIELD_IBAN ?>: <span><?= $formData['iban']; ?></span></p>
+                                    <p><?= NEW_FIELD_BANKNAME ?>: <span><?= $formData['bankName']; ?></span></p>
+                                    <p><?= NEW_FIELD_SWIFT ?>: <span><?= $formData['swift']; ?></span></p>
                                     <div class="card-info">
-                                        <p>Numéro de la carte d'identité: <span><?= $formData['idCard']; ?></span></p>
-                                        <p>Date d'expiration de la carte d'identité: <span><?= $formData['expiryDate']; ?></span></p>
+                                        <p><?= NEW_FIELD_ID_CARD ?>: <span><?= $formData['idCard']; ?></span></p>
+                                        <p><?= NEW_FIELD_EXPIRY_CARD_ID ?>: <span><?= $formData['expiryDate']; ?></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -171,9 +173,9 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Type de métaux</th>
-                                        <th>Description <span class="th-desc">(facultatif)</span></th>
-                                        <th>Poids en kg</th>
+                                        <th><?= NEW_FIELD_TYPE_METAL ?></th>
+                                        <th><?= NEW_FIELD_DESCRIPTION_PACKAGE ?></th>
+                                        <th><?= NEW_FIELD_WEIGHT ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -192,27 +194,27 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
 
                     <footer>
                         <div class="footer-content">
-                            <p class="accept-conditions">J’ai pris connaissance des conditions générales et de la déclaration de confidentialité et je les accepte.</p>
-                            <p class="certificate"><strong>Certificat de propriété :</strong><br>En tant que personne majeure disposant pleinement de ma capacité juridique, je certifie sur l'honneur que le matériel proposé à la vente par l'entreprise Metalcash sprl m’appartient de manière exclusive et sans restriction, qu'il n'est issu d'aucune activité illégale, qu'il n'est ni mis en gage ni cédé, et qu'il ne contient aucune composante dangereuse.</p>
-                            <p class="conditions"><strong>Lire les conditions générales et la déclaration de confidentialité :</strong><br><a href="https://www.metalcash.be/faq">https://www.metalcash.be/faq</a> — <a href="https://www.metalcash.be/legal">https://www.metalcash.be/legal</a></p>
+                            <p class="accept-conditions"><?= BORDEREAU_CONDITION_ACCEPT ?></p>
+                            <p class="certificate"><strong><?= BORDEREAU_CERTIFCATE_TITLE ?> :</strong><br><?= BORDEREAU_CERTIFCATE_DESCRIPTION ?></p>
+                            <p class="conditions"><strong><?= BORDEREAU_CONDITIONS_TITLE ?> :</strong><br><a href="<?= BORDEREAU_CONDITIONS_LINK1 ?>"><?= BORDEREAU_CONDITIONS_LINK1 ?></a> — <a href="<?= BORDEREAU_CONDITIONS_LINK2 ?>"><?= BORDEREAU_CONDITIONS_LINK2 ?></a></p>
                         </div>
                         <div class="signature-section">
                             <div class="signature-line"></div>
-                            <p>Date</p>
+                            <p><?= BORDEREAU_DATE ?></p>
                             <div class="signature-line"></div>
-                            <p>Signature</p>
+                            <p><?= BORDEREAU_SIGNATURE ?></p>
                         </div>
                     </footer>
 
                     <div class="content-cut-out">
                         <i class="fa-solid fa-scissors scissors-icon"></i>
-                        <p>N'oubliez pas de découper la partie ci-dessous et de l'apposer à l'extérieur du colis bien visible</p>
+                        <p><?= BORDEREAU_CUTE_TEXT ?></p>
                         <i class="fa-solid fa-scissors scissors-icon2"></i>
                         <div class="informations-cut">
                             <!-- Code-barres spécifique au colis -->
                             <img src="<?= $relativeBarcodePath; ?>" alt="Metalcash-package-id" />
                             <span class="cut-uniqueId"><?= $currentUniqueId ?></span>
-                            <span class="cut-packageId">Colis <?= $package['package_number'] ?>/<?= count($packages); ?></span>
+                            <span class="cut-packageId"><?= NEW_TITLE_INDEX_PACKAGE ?> <?= $package['package_number'] ?>/<?= count($packages); ?></span>
                         </div>
                     </div>
                 </div>
@@ -220,7 +222,7 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
         <?php endforeach; ?>
 
         <div class="footer-btn-back">
-            <a href="/" class="formbold-btn">Retour vers l'accueil</a>
+            <a href="/" class="formbold-btn"><?= BORDEREAU_BTN_BACK ?></a>
         </div>
     </div>
 

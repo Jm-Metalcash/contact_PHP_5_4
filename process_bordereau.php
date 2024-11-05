@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
 
             $packagesTables .= "
             <div style='background-color: #f9f9f9; padding: 10px; margin-bottom: 10px; border-radius: 8px;'>
-                <h3 style='color: #333; font-size: 18px; margin-top: 10px;'>Colis {$data['package_number']} (ID : {$data['package_id']})</h3>
+                <h3 style='color: #333; font-size: 18px; margin-top: 10px;'>Colis {$data['package_number']} ({$data['package_id']})</h3>
                 <table style='width: 100%; border-collapse: collapse;'>
                     <tr>
                         <th style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;'>Type de Matériau</th>
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
             <h1 style='font-size: 24px; color: #333;'>Détails du Bordereau</h1>
         </div>
         <div style='padding: 20px;'>
-            <p style='color: #555; font-size: 16px;'><strong>ID Unique :</strong> {$uniqueId}</p>
+            <p style='color: #555; font-size: 16px;'><strong>ID Bordereau :</strong> {$uniqueId}</p>
             <p style='color: #555; font-size: 16px;'><strong>Prénom :</strong> {$_POST['firstname']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Nom :</strong> {$_POST['lastname']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Email :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>

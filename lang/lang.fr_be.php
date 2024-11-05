@@ -30,12 +30,14 @@ define("NEW_MESSAGE_ERROR_SUBMIT_CONTACTFORM", "Merci de vérifier et de corrige
 
 
 // SUCCESS MAIL CONFIRMATION PAGE
+define("NEW_TITLE_PAGE_CONFIRM_MAIL", "Confirmation de la réception de votre e-mail");
 define("NEW_SUCCESS_EMAIL_TITLE", "Merci pour votre message !");
 define("NEW_SUCCESS_EMAIL_DESC", "Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.");
 define("NEW_SUCCESS_EMAIL_BTN", "Retour à la page d'accueil");
 
 //NEW FORM BORDEREAU
 define("NEW_BORDEREAU_TITLE", "Créez votre bordereau d'achat");
+define("NEW_BORDEREAU_ADDRESS", "Avenue André Ernst 3A, 4800 Verviers, Belgique");
 define("NEW_BORDEREAU_DESCRIPTION", "Le bordereau est à inclure dans votre colis à destination de l'adresse suivante :");
 define("NEW_NOTE_BORDEREAU", "NOTE: Les colis pesant moins de 10kg ne sont pas acceptés.");
 define("TITLE_HEADER_INFORMATIONNS", "Informations générales");
@@ -52,12 +54,12 @@ define("TITLE_HEADER_BANK", "Coordonnées bancaires");
 define("NEW_FIELD_ACCOUNT_HOLDER", "Titulaire du compte");
 define("NEW_FIELD_IBAN", "IBAN");
 define("NEW_ERROR_MESSAGE_IBAN", "L'IBAN fourni n'est pas valide. Veuillez vérifier et réessayer");
-define("NEW_FIELD_BANKNAME", "Nom de votre banque");
+define("NEW_FIELD_BANKNAME", "Nom de la banque");
 define("NEW_PLACEHOLDER_BANKNAME", "Le nom de votre banque");
 define("NEW_FIELD_SWIFT", "SWIFT");
 define("TITLE_HEADER_ID_CARD", "Informations de la carte d'identité");
-define("NEW_FIELD_ID_CARD", "Numéro de votre carte d'identité");
-define("NEW_FIELD_EXPIRY_CARD_ID", "Date d'expiration de votre carte d'identité");
+define("NEW_FIELD_ID_CARD", "Numéro de la carte d'identité");
+define("NEW_FIELD_EXPIRY_CARD_ID", "Date d'expiration de la carte d'identité");
 define("NEW_ERROR_MESSAGE_EXPIRY_ID_CARD", "La date saisie n'est pas valide. exemple: Jour/Mois/Année");
 define("NEW_ERROR_MESSAGE_EXPIRYDATE_ID_CARD", "Votre carte d'identité est expirée.");
 define("TITLE_HEADER_PACKAGES", "Informations sur le(s) colis");
@@ -77,7 +79,28 @@ define("BTN_SUBMIT_BORDEREAU", "Générer le bordereau d'achat");
 define("BTN_SUBMIT_ERROR_BORDEREAU", "Merci de vérifier et de corriger les informations avant de procéder à la génération du bordereau d'achat.");
 
 
-
+// PAGE BORDEREAU GENERATE
+define("NEW_TITLE_PAGE_BORDEREAU", "Bordereau d'achat");
+define("BTN_DOWNLOAD_PDF", "Télécharger PDF");
+define("BTN_TEXT2_DOWNLOAD_PDF", "Colis");
+define("TITLE_HEADER_BORDEREAU", "Bordereau d'achat");
+define("DATE_GENERATE_BARRE_CODE", "Créé le");
+define("HEADER_BORDEREAU_INFORMATIONS", "SERVICE D'ENVOI POSTAL");
+define("HEADER_BORDEREAU_NOTE", "NOTE: Les colis pesant moins de 10 kg ne sont pas acceptés (voir les conditions en bas de page).");
+define("BENEFICIARY_INFO", "Identification du bénéficiaire");
+define("BENEFICIARY_INFO_STREET", "Rue");
+define("BENEFICIARY_INFO_LOCALITY", "CP, Localité");
+define("BENEFICIARY_INFO_PHONE", "Téléphone");
+define("BORDEREAU_CONDITION_ACCEPT", "J’ai pris connaissance des conditions générales et de la déclaration de confidentialité et je les accepte.");
+define("BORDEREAU_CERTIFCATE_TITLE", "Certificat de propriété");
+define("BORDEREAU_CERTIFCATE_DESCRIPTION", "En tant que personne majeure disposant pleinement de ma capacité juridique, je certifie sur l'honneur que le matériel proposé à la vente par l'entreprise Metalcash sprl m’appartient de manière exclusive et sans restriction, qu'il n'est issu d'aucune activité illégale, qu'il n'est ni mis en gage ni cédé, et qu'il ne contient aucune composante dangereuse.");
+define("BORDEREAU_CONDITIONS_TITLE", "Lire les conditions générales et la déclaration de confidentialité");
+define("BORDEREAU_CONDITIONS_LINK1", "https://www.metalcash.be/faq");
+define("BORDEREAU_CONDITIONS_LINK2", "https://www.metalcash.be/legal");
+define("BORDEREAU_DATE", "Date");
+define("BORDEREAU_SIGNATURE", "Signature");
+define("BORDEREAU_CUTE_TEXT", "N'oubliez pas de découper la partie ci-dessous et de l'apposer à l'extérieur du colis bien visible");
+define("BORDEREAU_BTN_BACK", "Retour vers l'accueil");
 
 
 ?>
