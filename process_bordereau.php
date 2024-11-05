@@ -126,17 +126,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
 <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
     <div style='max-width: 900px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);'>
         <div style='text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eaeaea;'>
-            <img src='./images/logo-HD.webp' alt='Metalcash Logo' style='max-width: 150px; margin-bottom: 10px;' />
-            <h1 style='font-size: 24px; color: #333;'>Détails du Bordereau</h1>
+            <h1 style='font-size: 16px; color: #005893;'>Metalcash</h1>
+            <h2 style='font-size: 24px; color: #333;'>Détails du Bordereau</h2>
         </div>
         <div style='padding: 20px;'>
             <p style='color: #555; font-size: 16px;'><strong>ID Bordereau :</strong> {$uniqueId}</p>
             <p style='color: #555; font-size: 16px;'><strong>Prénom :</strong> {$_POST['firstname']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Nom :</strong> {$_POST['lastname']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Email :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>
+            <p style='color: #555; font-size: 16px;'><strong>E-mail :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>
             <p style='color: #555; font-size: 16px;'><strong>Téléphone :</strong> {$_POST['phone']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Adresse :</strong> {$_POST['address']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Localité :</strong> {$_POST['locality']}, {$_POST['postalCode']}, {$_POST['country']}</p>
+            <p style='color: #555; font-size: 16px;'><strong>Titulaire du compte :</strong> {$_POST['firstname']} {$_POST['lastname']}</p>
             <p style='color: #555; font-size: 16px;'><strong>IBAN :</strong> {$_POST['iban']}</p>
             <p style='color: #555; font-size: 16px;'><strong>Banque :</strong> {$_POST['bankName']} ({$_POST['swift']})</p>
             <p style='color: #555; font-size: 16px;'><strong>Nombre de colis :</strong> $packageCount</p>
