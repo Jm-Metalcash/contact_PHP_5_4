@@ -1,6 +1,14 @@
 <?php
 session_start(); // Démarrer la session
 
+// Importer PHPMailer et ses dépendances
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '.\vendor\phpmailer\phpmailer\src\Exception.php';
+require '.\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require '.\vendor\phpmailer\phpmailer\src\SMTP.php';
+
 // Connexion à la base de données
 include 'config.php';
 $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
@@ -66,11 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         }
     }
 
-    // Compter le nombre de colis associés à ce bordereau
-    $packageCountQuery = $db->prepare("SELECT COUNT(*) FROM package_informations WHERE bordereau_id = :bordereau_id");
-    $packageCountQuery->execute([':bordereau_id' => $uniqueId]);
-    $packageCount = $packageCountQuery->fetchColumn();
-
     // Récupérer les informations de chaque colis et leurs contenus
     $packagesQuery = $db->prepare("
         SELECT p.id AS package_id, p.package_number, c.material_type, c.description, c.weight 
@@ -113,61 +116,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
     $packagesTables .= "</table></div>";
 
     // Contenu du message de notification en HTML
-    $to = 'jm@metalcash.be';
     $subject = "[Metalcash - Notification] Nouveau bordereau généré ({$uniqueId})";
-
     $message = "
-<html>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>$subject</title>
-</head>
-<body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
-    <div style='max-width: 900px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);'>
-        <div style='text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eaeaea;'>
-            <h1 style='font-size: 16px; color: #005893;'>Metalcash</h1>
-            <h2 style='font-size: 24px; color: #333;'>Détails du Bordereau</h2>
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>$subject</title>
+    </head>
+    <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
+        <div style='max-width: 900px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);'>
+            <div style='text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eaeaea;'>
+                <h1 style='font-size: 16px; color: #005893;'>Metalcash</h1>
+                <h2 style='font-size: 24px; color: #333;'>Détails du Bordereau</h2>
+            </div>
+            <div style='padding: 20px;'>
+                <p style='color: #555; font-size: 16px;'><strong>ID Bordereau :</strong> {$uniqueId}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Prénom :</strong> {$_POST['firstname']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Nom :</strong> {$_POST['lastname']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>E-mail :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>
+                <p style='color: #555; font-size: 16px;'><strong>Téléphone :</strong> {$_POST['phone']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Adresse :</strong> {$_POST['address']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Localité :</strong> {$_POST['locality']}, {$_POST['postalCode']}, {$_POST['country']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Titulaire du compte :</strong> {$_POST['firstname']} {$_POST['lastname']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>IBAN :</strong> {$_POST['iban']}</p>
+                <p style='color: #555; font-size: 16px;'><strong>Banque :</strong> {$_POST['bankName']} ({$_POST['swift']})</p>
+                <p style='color: #555; font-size: 16px;'><strong>Nombre de colis :</strong> " . count(array_unique(array_column($packagesData, 'package_id'))) . "</p>
+                <h3 style='color: #333; font-size: 20px; margin-top: 20px;'>Récapitulatif des colis :</h3>
+                $packagesTables
+            </div>
+            <div style='text-align: center; padding-top: 20px; border-top: 1px solid #eaeaea; margin-top: 20px;'>
+                <p style='font-size: 12px; color: #888;'>Cet e-mail a été envoyé automatiquement depuis Metalcash.</p>
+            </div>
         </div>
-        <div style='padding: 20px;'>
-            <p style='color: #555; font-size: 16px;'><strong>ID Bordereau :</strong> {$uniqueId}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Prénom :</strong> {$_POST['firstname']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Nom :</strong> {$_POST['lastname']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>E-mail :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>
-            <p style='color: #555; font-size: 16px;'><strong>Téléphone :</strong> {$_POST['phone']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Adresse :</strong> {$_POST['address']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Localité :</strong> {$_POST['locality']}, {$_POST['postalCode']}, {$_POST['country']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Titulaire du compte :</strong> {$_POST['firstname']} {$_POST['lastname']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>IBAN :</strong> {$_POST['iban']}</p>
-            <p style='color: #555; font-size: 16px;'><strong>Banque :</strong> {$_POST['bankName']} ({$_POST['swift']})</p>
-            <p style='color: #555; font-size: 16px;'><strong>Nombre de colis :</strong> $packageCount</p>
-            <h3 style='color: #333; font-size: 20px; margin-top: 20px;'>Récapitulatif des colis :</h3>
-            $packagesTables
-        </div>
-        <div style='text-align: center; padding-top: 20px; border-top: 1px solid #eaeaea; margin-top: 20px;'>
-            <p style='font-size: 12px; color: #888;'>Cet e-mail a été envoyé automatiquement depuis Metalcash.</p>
-        </div>
-    </div>
-</body>
-</html>
-";
+    </body>
+    </html>
+    ";
 
-    $headers = "From: itmetalcash@gmail.com\r\n";
-    $headers .= "Reply-To: itmetalcash@gmail.com\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    if (mail($to, $subject, $message, $headers)) {
+    // Créer une instance de PHPMailer
+    $mail = new PHPMailer(true);
+
+    try {
+        // Configuration du serveur SMTP de Gmail
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'itmetalcash@gmail.com';
+        $mail->Password = 'zqlsdmutmhkguhvh';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Définir la langue sur français et encodage UTF-8
+        $mail->setLanguage('fr', '.\vendor\phpmailer\phpmailer\language');
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
+
+        // Configuration de l'e-mail
+        $mail->setFrom('itmetalcash@gmail.com', 'Metalcash');
+        $mail->addAddress('jm@metalcash.be');
+
+        // Contenu de l'e-mail
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        // Envoyer l'e-mail
+        $mail->send();
         echo "Notification envoyée avec succès.";
-    } else {
-        echo "Erreur lors de l'envoi de la notification par e-mail.";
+    } catch (Exception $e) {
+        echo "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
     }
 
     $_SESSION['uniqueId'] = $uniqueId;
     header("Location: bordereau_achat.php");
     exit();
-
 } else {
     echo "Erreur : Données de formulaire manquantes.";
 }
-?>

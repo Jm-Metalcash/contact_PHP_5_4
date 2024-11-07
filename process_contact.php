@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
         <div style='max-width: 900px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);'>
             <div style='text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eaeaea;'>
-                <img src='./images/logo-HD.webp' alt='Metalcash Logo' style='max-width: 150px; margin-bottom: 10px;' />
+                <h1 style='font-size: 16px; color: #005893;'>Metalcash</h1>
             </div>
             <div style='padding: 20px;'>
                 <h2 style='color: #333; font-size: 24px; margin-bottom: 20px;'>Nouveau message de $firstname $lastname</h2>
