@@ -148,7 +148,7 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                                 <p><?= htmlspecialchars(NEW_BORDEREAU_ADDRESS) ?></p>
                             </div>
                         </div>
-                        <p class="note"><?= htmlspecialchars(HEADER_BORDEREAU_NOTE) ?></p>
+                        <p class="note"><?= htmlspecialchars(NEW_NOTE_BORDEREAU) ?></p>
                     </header>
 
                     <main>
@@ -173,8 +173,8 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                                     <p><?= htmlspecialchars(NEW_FIELD_BANKNAME) ?>: <span><?= htmlspecialchars($formData['bankName']); ?></span></p>
                                     <p><?= htmlspecialchars(NEW_FIELD_SWIFT) ?>: <span><?= htmlspecialchars($formData['swift']); ?></span></p>
                                     <div class="card-info">
-                                        <p><?= htmlspecialchars(NEW_FIELD_ID_CARD) ?>: <span><?= htmlspecialchars($formData['idCard']); ?></span></p>
-                                        <p><?= htmlspecialchars(NEW_FIELD_EXPIRY_CARD_ID) ?>: <span><?= htmlspecialchars($formData['expiryDate']); ?></span></p>
+                                        <p><?= htmlspecialchars(NEW_FIELD_ID_CARD_BORDEREAU) ?>: <span><?= htmlspecialchars($formData['idCard']); ?></span></p>
+                                        <p><?= htmlspecialchars(NEW_FIELD_ID_EXPIRY_BORDEREAU) ?>: <span class="expiry-date-ci"><?= htmlspecialchars($formData['expiryDate']); ?></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -211,11 +211,11 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                             <p class="conditions"><strong><?= htmlspecialchars(BORDEREAU_CONDITIONS_TITLE) ?> :</strong><br><a href="<?= htmlspecialchars(BORDEREAU_CONDITIONS_LINK1) ?>"><?= htmlspecialchars(BORDEREAU_CONDITIONS_LINK1) ?></a> — <a href="<?= htmlspecialchars(BORDEREAU_CONDITIONS_LINK2) ?>"><?= htmlspecialchars(BORDEREAU_CONDITIONS_LINK2) ?></a></p>
                         </div>
                         <div class="signature-section">
-                            <div class="signature-line"></div>
                             <p><?= htmlspecialchars(BORDEREAU_DATE) ?></p>
-                            <div class="signature-line"></div>
+                            <p class="signature-name"><?= BORDEREAU_SIGNATURE_NAME ?></p>
                             <p><?= htmlspecialchars(BORDEREAU_SIGNATURE) ?></p>
                         </div>
+
                     </footer>
 
                     <div class="content-cut-out">
@@ -227,8 +227,10 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
                             <img src="<?= htmlspecialchars($relativeBarcodePath); ?>" alt="Metalcash-package-id" />
                             <span class="cut-uniqueId"><?= htmlspecialchars($currentUniqueId) ?></span>
                             <span class="cut-packageId"><?= htmlspecialchars(NEW_TITLE_INDEX_PACKAGE) ?> <?= htmlspecialchars($package['package_number']) ?>/<?= count($packages); ?></span>
+                            <span class="cut-name"><?= htmlspecialchars($formData['firstname'] . ' ' . $formData['lastname'], ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                     </div>
+
                 </div>
             </div>
         <?php endforeach; ?>
@@ -248,8 +250,17 @@ $relativeBarcodePathGeneral = './images/barcodes/barcode-general-' . $uniqueId .
             const options = {
                 margin: [5, 10, 0, 13],
                 filename: 'bordereau_achat_metalcash_colis_' + packageId + '.pdf',
-                html2canvas: { scrollX: 0, scrollY: 0, scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: {
+                    scrollX: 0,
+                    scrollY: 0,
+                    scale: 2,
+                    useCORS: true
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
             };
 
             html2pdf().from(element).set(options).save().then(() => {

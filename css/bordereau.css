@@ -96,7 +96,7 @@ body {
 .pdf-container {
     border: 1px solid black;
     width: 850px;
-    height: 1050px;
+    height: 1085px;
     margin: 0 auto 130px auto;
 }
 
@@ -271,10 +271,12 @@ header {
 }
 
 .card-info span {
-    padding-left: 12px;
+    padding-left: 31px;
     text-align: left;
 }
-
+.card-info .expiry-date-ci {
+    padding-left: 19px;
+}
 /* SECTION TABLES */
 table {
     margin-top: 10px;
@@ -321,9 +323,9 @@ footer {
 }
 
 .footer-content {
-    margin-top: 30px;
-    width: 70%;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    width: 55%;
+    margin-bottom: 50px;
 }
 
 .accept-conditions {
@@ -352,8 +354,8 @@ footer {
 }
 
 .signature-section {
-    margin-top: 50px;
-    width: 40%;
+    margin-top: 45px;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -367,9 +369,13 @@ footer {
 }
 
 .signature-section p {
-    text-align: right;
+    text-align: left;
     font-size: 12px;
     margin-top: 5px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
 }
 
 /* Image metalcash */
@@ -414,7 +420,7 @@ footer {
 }
 .scissors-icon2 {
     position: absolute;
-    bottom: 75px;
+    bottom: 93px;
     left: 0;
     font-size: 16px;
     color: #333;
@@ -456,6 +462,13 @@ footer {
     transform: translateY(-50%);
     font-size: 40px;
     color: #333;
+}
+
+.cut-name {
+    position: relative;
+    left: 107%;
+    bottom: 20px;
+    text-transform: uppercase;
 }
 /* END Zone de découpe */
 

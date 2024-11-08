@@ -1,21 +1,33 @@
 <?php
-session_start(); // Démarrer la session
+session_start();
 
-// Importer PHPMailer et ses dépendances
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '.\vendor\phpmailer\phpmailer\src\Exception.php';
-require '.\vendor\phpmailer\phpmailer\src\PHPMailer.php';
-require '.\vendor\phpmailer\phpmailer\src\SMTP.php';
+require './vendor/phpmailer/phpmailer/src/Exception.php';
+require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require './vendor/phpmailer/phpmailer/src/SMTP.php';
 
-// Connexion à la base de données
 include 'config.php';
 $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['lastname'], $_POST['email'])) {
 
-    $uniqueId = $_POST['uniqueId'];
+    $uniqueId = filter_input(INPUT_POST, 'uniqueId', FILTER_SANITIZE_STRING);
+    $firstname = htmlspecialchars(trim($_POST['firstname']), ENT_QUOTES, 'UTF-8');
+    $lastname = htmlspecialchars(trim($_POST['lastname']), ENT_QUOTES, 'UTF-8');
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $phone = htmlspecialchars(trim($_POST['phone']), ENT_QUOTES, 'UTF-8');
+    $address = htmlspecialchars(trim($_POST['address']), ENT_QUOTES, 'UTF-8');
+    $postalCode = htmlspecialchars(trim($_POST['postalCode']), ENT_QUOTES, 'UTF-8');
+    $locality = htmlspecialchars(trim($_POST['locality']), ENT_QUOTES, 'UTF-8');
+    $country = htmlspecialchars(trim($_POST['country']), ENT_QUOTES, 'UTF-8');
+    $iban = htmlspecialchars(trim($_POST['iban']), ENT_QUOTES, 'UTF-8');
+    $bankName = htmlspecialchars(trim($_POST['bankName']), ENT_QUOTES, 'UTF-8');
+    $swift = htmlspecialchars(trim($_POST['swift']), ENT_QUOTES, 'UTF-8');
+    $idCard = htmlspecialchars(trim($_POST['idCard']), ENT_QUOTES, 'UTF-8');
+    $expiryDate = htmlspecialchars(trim($_POST['expiryDate']), ENT_QUOTES, 'UTF-8');
 
     // Insertion des données dans `bordereau_generate`
     $insertBordereau = $db->prepare("
@@ -26,23 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
     $insertBordereau->execute([
         ':id' => $uniqueId,
         ':status' => 1,
-        ':firstname' => $_POST['firstname'],
-        ':lastname' => $_POST['lastname'],
-        ':email' => $_POST['email'],
-        ':phone' => $_POST['phone'],
-        ':address' => $_POST['address'],
-        ':postalCode' => $_POST['postalCode'],
-        ':locality' => $_POST['locality'],
-        ':country' => $_POST['country'],
-        ':accountHolder' => $_POST['firstname'] . ' ' . $_POST['lastname'],
-        ':iban' => $_POST['iban'],
-        ':bankName' => $_POST['bankName'],
-        ':swift' => $_POST['swift'],
-        ':idCard' => $_POST['idCard'],
-        ':expiryDate' => $_POST['expiryDate']
+        ':firstname' => $firstname,
+        ':lastname' => $lastname,
+        ':email' => $email,
+        ':phone' => $phone,
+        ':address' => $address,
+        ':postalCode' => $postalCode,
+        ':locality' => $locality,
+        ':country' => $country,
+        ':accountHolder' => $firstname . ' ' . $lastname,
+        ':iban' => $iban,
+        ':bankName' => $bankName,
+        ':swift' => $swift,
+        ':idCard' => $idCard,
+        ':expiryDate' => $expiryDate
     ]);
 
-    // Insertion des informations des colis et des matériaux dans la base de données
     if (isset($_POST['materialType']) && is_array($_POST['materialType'])) {
         $insertPackage = $db->prepare("
             INSERT INTO package_informations (id, bordereau_id, package_number)
@@ -64,17 +75,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
             ]);
 
             foreach ($materials as $index => $materialType) {
+                $description = htmlspecialchars($_POST['description'][$packageId][$index] ?? null, ENT_QUOTES, 'UTF-8');
+                $weight = htmlspecialchars($_POST['weight'][$packageId][$index] ?? null, ENT_QUOTES, 'UTF-8');
+
                 $insertContent->execute([
                     ':package_id' => $currentUniqueId,
-                    ':material_type' => $materialType,
-                    ':description' => $_POST['description'][$packageId][$index] ?? null,
-                    ':weight' => $_POST['weight'][$packageId][$index] ?? null
+                    ':material_type' => htmlspecialchars($materialType, ENT_QUOTES, 'UTF-8'),
+                    ':description' => $description,
+                    ':weight' => $weight
                 ]);
             }
         }
     }
 
-    // Récupérer les informations de chaque colis et leurs contenus
     $packagesQuery = $db->prepare("
         SELECT p.id AS package_id, p.package_number, c.material_type, c.description, c.weight 
         FROM package_informations p 
@@ -85,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
     $packagesQuery->execute([':bordereau_id' => $uniqueId]);
     $packagesData = $packagesQuery->fetchAll(PDO::FETCH_ASSOC);
 
-    // Construire les tables HTML pour chaque colis
     $packagesTables = "";
     $currentPackageId = null;
     foreach ($packagesData as $data) {
@@ -108,14 +120,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
 
         $packagesTables .= "
             <tr>
-                <td style='border: 1px solid #ddd; padding: 8px;'>{$data['material_type']}</td>
-                <td style='border: 1px solid #ddd; padding: 8px;'>{$data['description']}</td>
-                <td style='border: 1px solid #ddd; padding: 8px;'>{$data['weight']}</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['material_type'], ENT_QUOTES, 'UTF-8') ."</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['description'], ENT_QUOTES, 'UTF-8') ."</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['weight'], ENT_QUOTES, 'UTF-8') ."</td>
             </tr>";
     }
     $packagesTables .= "</table></div>";
 
-    // Contenu du message de notification en HTML
     $subject = "[Metalcash - Notification] Nouveau bordereau généré ({$uniqueId})";
     $message = "
     <html>
@@ -130,34 +141,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
                 <h2 style='font-size: 24px; color: #333;'>Détails du Bordereau</h2>
             </div>
             <div style='padding: 20px;'>
-                <p style='color: #555; font-size: 16px;'><strong>ID Bordereau :</strong> {$uniqueId}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Prénom :</strong> {$_POST['firstname']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Nom :</strong> {$_POST['lastname']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>E-mail :</strong> <a href='mailto:{$_POST['email']}' style='color: #1d72b8;'>{$_POST['email']}</a></p>
-                <p style='color: #555; font-size: 16px;'><strong>Téléphone :</strong> {$_POST['phone']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Adresse :</strong> {$_POST['address']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Localité :</strong> {$_POST['locality']}, {$_POST['postalCode']}, {$_POST['country']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Titulaire du compte :</strong> {$_POST['firstname']} {$_POST['lastname']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>IBAN :</strong> {$_POST['iban']}</p>
-                <p style='color: #555; font-size: 16px;'><strong>Banque :</strong> {$_POST['bankName']} ({$_POST['swift']})</p>
-                <p style='color: #555; font-size: 16px;'><strong>Nombre de colis :</strong> " . count(array_unique(array_column($packagesData, 'package_id'))) . "</p>
-                <h3 style='color: #333; font-size: 20px; margin-top: 20px;'>Récapitulatif des colis :</h3>
+                <p><strong>ID Bordereau :</strong> {$uniqueId}</p>
+                <p><strong>Prénom :</strong> {$firstname}</p>
+                <p><strong>Nom :</strong> {$lastname}</p>
+                <p><strong>E-mail :</strong> <a href='mailto:{$email}' style='color: #1d72b8;'>{$email}</a></p>
+                <p><strong>Téléphone :</strong> {$phone}</p>
+                <p><strong>Adresse :</strong> {$address}</p>
+                <p><strong>Localité :</strong> {$locality}, {$postalCode}, {$country}</p>
+                <p><strong>IBAN :</strong> {$iban}</p>
+                <p><strong>Banque :</strong> {$bankName} ({$swift})</p>
+                <h3>Récapitulatif des colis :</h3>
                 $packagesTables
-            </div>
-            <div style='text-align: center; padding-top: 20px; border-top: 1px solid #eaeaea; margin-top: 20px;'>
-                <p style='font-size: 12px; color: #888;'>Cet e-mail a été envoyé automatiquement depuis Metalcash.</p>
             </div>
         </div>
     </body>
-    </html>
-    ";
+    </html>";
 
-
-    // Créer une instance de PHPMailer
     $mail = new PHPMailer(true);
 
     try {
-        // Configuration du serveur SMTP de Gmail
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -166,21 +168,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        // Définir la langue sur français et encodage UTF-8
-        $mail->setLanguage('fr', '.\vendor\phpmailer\phpmailer\language');
+        $mail->setLanguage('fr', './vendor/phpmailer/phpmailer/language');
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
-        // Configuration de l'e-mail
         $mail->setFrom('itmetalcash@gmail.com', 'Metalcash');
         $mail->addAddress('jm@metalcash.be');
 
-        // Contenu de l'e-mail
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $message;
 
-        // Envoyer l'e-mail
         $mail->send();
         echo "Notification envoyée avec succès.";
     } catch (Exception $e) {
