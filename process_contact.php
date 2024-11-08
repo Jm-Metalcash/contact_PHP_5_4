@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars(trim($_POST['email']));
     $phone = htmlspecialchars(trim($_POST['phone']));
     $subject = htmlspecialchars(trim($_POST['subject']));
-    $message = nl2br(htmlspecialchars(trim($_POST['question']))); // Convertir les sauts de ligne en <br>
+    $message = nl2br(htmlspecialchars(trim($_POST['question']))); 
 
     // Vérifier que les champs obligatoires ne sont pas vides
     if (empty($email) || empty($message)) {
