@@ -1,6 +1,24 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'lang/lang.fr_be.php';
+
+session_start(); // Démarrer la session
+
+if (!function_exists('random_int')) {
+    function random_int($min, $max) {
+        return mt_rand($min, $max);
+    }
+}
+
+// Générer un ID unique et l’enregistrer dans la session
+$uniqueId = random_int(1000000000000, 9999999999999);
+$_SESSION['uniqueId'] = $uniqueId;
+error_log("Début du traitement du bordereau avec ID : " . $uniqueId);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -115,7 +133,7 @@ include 'lang/lang.fr_be.php';
                 <!-- FORM BORDEREAU GENERATE -->
                 <div id="form-bordereau-box" class="form-box">
                     <form action="process_bordereau.php" method="POST" id="bordereauForm" autocomplete="off">
-                        <input type="hidden" name="uniqueId" value="<?php echo random_int(1000000000000, 9999999999999); ?>">
+                    <input type="hidden" name="uniqueId" value="<?php echo $_SESSION['uniqueId']; ?>">
                         <div class="formbold-form-title">
                             <h2 class=""><?= NEW_BORDEREAU_TITLE ?></h2>
                             <p>
@@ -294,8 +312,8 @@ include 'lang/lang.fr_be.php';
     </script>
 
     <!-- IMPORT SCRIPTS JS -->
-    <script src="js/main.js"></script>
     <script src="js/display-form.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/inputAnimation.js"></script>
     <script src="js/validateInput.js"></script>
     <script src="js/addPackage.js"></script>

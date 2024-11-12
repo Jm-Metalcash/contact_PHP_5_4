@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -11,6 +15,11 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
 include 'config.php';
 $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
 
+if (!function_exists('random_int')) {
+    function random_int($min, $max) {
+        return mt_rand($min, $max);
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['lastname'], $_POST['email'])) {
 
@@ -29,13 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
     $idCard = htmlspecialchars(trim($_POST['idCard']), ENT_QUOTES, 'UTF-8');
     $expiryDate = htmlspecialchars(trim($_POST['expiryDate']), ENT_QUOTES, 'UTF-8');
 
-    // Insertion des données dans `bordereau_generate`
     $insertBordereau = $db->prepare("
         INSERT INTO bordereau_generate (id, status, firstname, lastname, email, phone, address, postalCode, locality, country, accountHolder, iban, bankName, swift, idCard, expiryDate)
         VALUES (:id, :status, :firstname, :lastname, :email, :phone, :address, :postalCode, :locality, :country, :accountHolder, :iban, :bankName, :swift, :idCard, :expiryDate)
     ");
 
-    $insertBordereau->execute([
+    $insertBordereau->execute(array(
         ':id' => $uniqueId,
         ':status' => 1,
         ':firstname' => $firstname,
@@ -52,41 +60,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         ':swift' => $swift,
         ':idCard' => $idCard,
         ':expiryDate' => $expiryDate
-    ]);
+    ));
 
     if (isset($_POST['materialType']) && is_array($_POST['materialType'])) {
         $insertPackage = $db->prepare("
             INSERT INTO package_informations (id, bordereau_id, package_number)
             VALUES (:id, :bordereau_id, :package_number)
         ");
-
+    
         $insertContent = $db->prepare("
             INSERT INTO package_content (package_id, material_type, description, weight)
             VALUES (:package_id, :material_type, :description, :weight)
         ");
-
+    
         foreach ($_POST['materialType'] as $packageId => $materials) {
             $currentUniqueId = $uniqueId . '-' . sprintf('%02d', $packageId);
 
-            $insertPackage->execute([
+            error_log("Insertion du colis avec ID : $currentUniqueId et bordereau_id : $uniqueId");
+            
+            // Insertion du colis
+            $insertPackage->execute(array(
                 ':id' => $currentUniqueId,
                 ':bordereau_id' => $uniqueId,
                 ':package_number' => $packageId
-            ]);
-
+            ));
+    
+            // Insertion du contenu des colis
             foreach ($materials as $index => $materialType) {
-                $description = htmlspecialchars($_POST['description'][$packageId][$index] ?? null, ENT_QUOTES, 'UTF-8');
-                $weight = htmlspecialchars($_POST['weight'][$packageId][$index] ?? null, ENT_QUOTES, 'UTF-8');
-
-                $insertContent->execute([
+                $description = isset($_POST['description'][$packageId][$index]) ? $_POST['description'][$packageId][$index] : '';
+                $weight = isset($_POST['weight'][$packageId][$index]) ? $_POST['weight'][$packageId][$index] : '';
+    
+                $insertContent->execute(array(
                     ':package_id' => $currentUniqueId,
                     ':material_type' => htmlspecialchars($materialType, ENT_QUOTES, 'UTF-8'),
-                    ':description' => $description,
-                    ':weight' => $weight
-                ]);
+                    ':description' => htmlspecialchars($description, ENT_QUOTES, 'UTF-8'),
+                    ':weight' => htmlspecialchars($weight, ENT_QUOTES, 'UTF-8')
+                ));
             }
         }
     }
+    
 
     $packagesQuery = $db->prepare("
         SELECT p.id AS package_id, p.package_number, c.material_type, c.description, c.weight 
@@ -95,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         WHERE p.bordereau_id = :bordereau_id 
         ORDER BY p.package_number, c.material_type
     ");
-    $packagesQuery->execute([':bordereau_id' => $uniqueId]);
+    $packagesQuery->execute(array(':bordereau_id' => $uniqueId));
     $packagesData = $packagesQuery->fetchAll(PDO::FETCH_ASSOC);
 
     $packagesTables = "";
@@ -120,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
 
         $packagesTables .= "
             <tr>
-                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['material_type'], ENT_QUOTES, 'UTF-8') ."</td>
-                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['description'], ENT_QUOTES, 'UTF-8') ."</td>
-                <td style='border: 1px solid #ddd; padding: 8px;'>". htmlspecialchars($data['weight'], ENT_QUOTES, 'UTF-8') ."</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>" . htmlspecialchars($data['material_type'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>" . htmlspecialchars($data['description'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td style='border: 1px solid #ddd; padding: 8px;'>" . htmlspecialchars($data['weight'], ENT_QUOTES, 'UTF-8') . "</td>
             </tr>";
     }
     $packagesTables .= "</table></div>";
@@ -164,11 +177,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'itmetalcash@gmail.com';
-        $mail->Password = 'zqlsdmutmhkguhvh';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Password = 'vnttwgxetquuncij';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
 
-        $mail->setLanguage('fr', './vendor/phpmailer/phpmailer/language');
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
@@ -182,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'], $_POST['
         $mail->send();
         echo "Notification envoyée avec succès.";
     } catch (Exception $e) {
-        echo "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
+        echo "Erreur lors de l'envoi de l'e-mail : " . $mail->ErrorInfo;
     }
 
     $_SESSION['uniqueId'] = $uniqueId;

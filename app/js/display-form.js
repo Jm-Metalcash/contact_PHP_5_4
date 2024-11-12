@@ -28,4 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Affiche le formulaire de contact par défaut
     document.getElementById('form-contact-box').classList.add('active');
+
 });

@@ -458,7 +458,7 @@ footer {
     width: 245px;
     position: absolute;
     left: 280px;
-    top: 30%;
+    top: 16%;
     transform: translateY(-50%);
     font-size: 40px;
     color: #333;
@@ -467,7 +467,7 @@ footer {
 .cut-name {
     position: relative;
     left: 107%;
-    bottom: 20px;
+    bottom: 40px;
     text-transform: uppercase;
 }
 /* END Zone de découpe */

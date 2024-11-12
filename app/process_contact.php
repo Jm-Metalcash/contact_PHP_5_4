@@ -3,9 +3,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Inclure PHPMailer
-require '.\vendor\phpmailer\phpmailer\src\Exception.php';
-require '.\vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '.\vendor\phpmailer\phpmailer\src\SMTP.php';
+require './vendor/phpmailer/phpmailer/src/Exception.php';
+require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require './vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -65,16 +66,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Configuration du serveur SMTP de Gmail
-        $mail->isSMTP();
+        $mail->isSMTP();       
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'itmetalcash@gmail.com';
-        $mail->Password = 'zqlsdmutmhkguhvh';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Password = 'vnttwgxetquuncij';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
 
          // Définir la langue sur français
-         $mail->setLanguage('fr', '.\vendor\phpmailer\phpmailer\language');
          $mail->CharSet = 'UTF-8';
          $mail->Encoding = 'base64';
 
